@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>dplyr examples: happiness</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Heike Hofmann" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# dplyr examples: happiness
+### Heike Hofmann
+
+---
+
+
+# The Happy data from GSS
+
+The General Social Survey (GSS) has been run by NORC every other year since 1972 to keep track of current opinions across the United States. 
+
+An excerpt of the GSS data called `happy` is available from the `classdata` package:
+
+
+```r
+remotes::install_github("heike/classdata")
+```
+
+
+```r
+library(classdata)
+head(happy)
+```
+
+```
+##   year age         degree       finrela         happy    health       marital
+## 1 1972  23       bachelor       average not too happy      good never married
+## 2 1972  70 lt high school above average not too happy      fair       married
+## 3 1972  48    high school       average  pretty happy excellent       married
+## 4 1972  27       bachelor       average not too happy      good       married
+## 5 1972  61    high school above average  pretty happy      good       married
+## 6 1972  26    high school above average  pretty happy      good never married
+##      sex polviews          partyid wtssall wtssnr
+## 1 female     &lt;NA&gt;     ind,near dem       7   1147
+## 2   male     &lt;NA&gt; not str democrat      54   1147
+## 3 female     &lt;NA&gt;      independent      54   1147
+## 4 female     &lt;NA&gt; not str democrat      54   1147
+## 5 female     &lt;NA&gt;  strong democrat      54   1147
+## 6   male     &lt;NA&gt;     ind,near dem       7   1147
+```
+
+You can find a codebook with explanations for each of the variables at https://gssdataexplorer.norc.org/
+
+---
+class: inverse
+# Your Turn
+
+Load the `happy` data from the `classdata` package.
+
+- how many variables, how many observations does the data have? What do the variables mean? 
+
+- Plot the variable `happy`. Introduce a new variable `nhappy` that has values 1 for `not too happy`, 2 for `pretty happy`, 3 for `very happy` and `NA` for missing values. There are multiple ways to get to that. Avoid `for` loops.
+
+- Based on the newly introduced numeric scores, what is the average happiness of respondents?
+
+---
+class: inverse
+# Your Turn
+
+- Are people now happier than previously? How does happiness evolve over time? Is this relationship different for men and women? Draw plots.
+
+
+- how does average happiness change over the course of a life time? Is this relationship different for men and women? Draw plots.
+
+
+---
+class: inverse
+# Your Turn
+
+- Are Republicans or Democrats happier? Compare average happiness levels over `partyid`.
+
+- How are financial relations associated with average happiness levels? Is this association different for men and women?
+
+- Find a plot that shows the differences for each one of the summaries.
+
+---
+class: inverse
+# Your Turn: asking questions 
+
+
+- What other variable(s) might be associated with happiness? Plot it.
+
+- Submit your code in Canvas for one point of extra credit.
+
+---
+
+# Helper functions (1)
+
+- `n()` provides the number of rows of a subset:
+
+```r
+library(dplyr)
+happy %&gt;% group_by(sex) %&gt;% summarise(n = n())
+```
+
+```
+## # A tibble: 3 × 2
+##   sex        n
+##   &lt;fct&gt;  &lt;int&gt;
+## 1 male   30350
+## 2 female 38404
+## 3 &lt;NA&gt;      92
+```
+
+- `tally()` is a combination of `summarise` and `n`
+
+```r
+happy %&gt;% group_by(sex) %&gt;% tally()
+```
+
+```
+## # A tibble: 3 × 2
+##   sex        n
+##   &lt;fct&gt;  &lt;int&gt;
+## 1 male   30350
+## 2 female 38404
+## 3 &lt;NA&gt;      92
+```
+
+---
+
+# Helper functions (2)
+
+- `count()` is a further shortcut of `group_by` and `tally`:
+
+
+```r
+happy %&gt;% count(sex, degree)
+```
+
+```
+##       sex         degree     n
+## 1    male lt high school  6021
+## 2    male    high school 14828
+## 3    male junior college  1637
+## 4    male       bachelor  4951
+## 5    male       graduate  2828
+## 6    male           &lt;NA&gt;    85
+## 7  female lt high school  7766
+## 8  female    high school 19942
+## 9  female junior college  2400
+## 10 female       bachelor  5551
+## 11 female       graduate  2641
+## 12 female           &lt;NA&gt;   104
+## 13   &lt;NA&gt; lt high school    46
+## 14   &lt;NA&gt;    high school    22
+## 15   &lt;NA&gt; junior college     1
+## 16   &lt;NA&gt;       bachelor     9
+## 17   &lt;NA&gt;       graduate     7
+## 18   &lt;NA&gt;           &lt;NA&gt;     7
+```
+
+- `count()` doesn't introduce any grouping
+
+
+---
+
+# Grouping and Ungrouping
+
+- `ungroup` removes a grouping structure from a data set
+
+- necessary to make changes to a grouping variable (such as re-ordering or re-labelling) 
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

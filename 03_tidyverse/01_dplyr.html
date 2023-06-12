@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Intro to the tidyverse</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Heike Hofmann" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Intro to the tidyverse
+### Heike Hofmann
+
+---
+
+
+# Data management in R: the tidyverse 
+
+&lt;img src="images/tidyverse.jpeg" alt="" width=500&gt;
+
+
+---
+
+# Outline
+
+- elements of data management: filtering, sorting, and aggregations
+
+
+- lots of examples
+
+---
+
+# `tidyverse`
+
+`tidyverse` is a package bundling several other R packages:
+
+- `ggplot2`, `dplyr`, `tidyr`, `purrr`, ...
+
+- share common data representations and API, i.e. work well together
+
+- from the [tidyverse manifesto](https://tidyverse.tidyverse.org/articles/manifesto.html):
+  
+    1. Reuse existing data structures.
+    
+    2. Compose simple functions with the pipe.
+    
+    3. Embrace functional programming.
+    
+    4. Design for humans.
+
+- see https://github.com/hadley/tidyverse for more information
+
+---
+
+# `dplyr` 
+
+There are a couple of primary `dplyr` *verbs*, representing distinct data analysis tasks:
+
+- `filter`: Select specified rows of a data frame, produce subsets
+
+- `mutate`: Add new or change existing columns of the data frame (as functions of existing columns)
+
+- `arrange`: Reorder the rows of a data frame
+
+- `select`: Select particular columns of a data frame
+
+- `summarize`: Create collapsed summaries of a data frame
+
+- `group_by`: Introduce structure to a data frame
+
+&lt;br&gt;&lt;br&gt;
+RStudio cheat sheet for [dplyr](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)
+---
+
+# Common structure
+
+1. all functions of the tidyverse have `data` as their first element
+
+```
+ggplot(data = fbi, aes(x = year, y = count)) + 
+  geom_point()
+
+filter(data = fbi, year &gt;= 2017, state == "Iowa")
+```
+
+*i.e. work well with `%&gt;%` operator*
+
+2. *Most* functions return a data set. 
+
+**The dimension of that data set is crucial, pay attention to it!**
+
+
+&lt;br&gt;
+&lt;br&gt;
+Important: do not use `$` notation for variables within these functions, e.g: 
+
+
+---
+
+# `filter`
+
+.pull-left[
+select a subset of the observations (horizontal selection):
+
+`filter (.data, ...)` 
+
+specify constraints (as logical expression) to data in `...` 
+
+all constraints are combined by logical and `&amp;`
+]
+
+.pull-right[
+![](images/filter.png)
+]
+
+.footnote[Make sure to always call `library(dplyr)` before using `filter`]
+
+---
+
+# `filter` Example
+
+From the `fbi` data, extract all burglaries in 2016:
+
+
+```r
+library(classdata)
+library(dplyr)
+
+fbi %&gt;% filter(type=="burglary", year==2016) %&gt;% head()
+```
+
+```
+## # A tibble: 6 × 8
+##   state      state_id state_abbr  year population type      count violent_crime
+##   &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;      &lt;int&gt;      &lt;int&gt; &lt;chr&gt;     &lt;int&gt; &lt;lgl&gt;        
+## 1 Alabama           2 AL          2016    4860545 burglary  34045 FALSE        
+## 2 Alaska            1 AK          2016     741522 burglary   4053 FALSE        
+## 3 Arizona           5 AZ          2016    6908642 burglary  38216 FALSE        
+## 4 Arkansas          3 AR          2016    2988231 burglary  23814 FALSE        
+## 5 California        6 CA          2016   39296476 burglary 188304 FALSE        
+## 6 Colorado          7 CO          2016    5530105 burglary  23825 FALSE
+```
+---
+
+## The pipe operator `%&gt;%`
+
+
+`f(x) %&gt;% g(y)` is equivalent to `g(f(x), y)`
+
+i.e. the output of one function is used as input to the next function. This function can be the identity
+
+Consequences:
+
+- `x %&gt;% f(y)` is the same as `f(x, y)`
+
+- statements of the form `k(h(g(f(x, y), z), u), v, w)` become
+`x %&gt;% f(y) %&gt;% g(z) %&gt;% h(u) %&gt;% k(v, w)`
+
+- read `%&gt;%` as "then do"
+
+---
+
+## Using the pipe `%&gt;%`
+
+```
+ggplot(data = filter(fbi, type=="homicide"), 
+aes(x = year, y = count)) + geom_point()
+```
+
+becomes
+
+```
+library(tidyverse)
+
+fbi %&gt;% 
+  filter(type=="homicide") %&gt;%
+  ggplot(aes(x = year, y = count)) + 
+    geom_point()
+```
+
+---
+
+# `mutate`
+
+.pull-left[
+
+
+`mutate (.data, ...)` 
+
+Introduce new variables into the data set or transform/update  old variables
+
+multiple variables can be changed/introduced
+
+`mutate` works sequentially:
+variables introduced become available in following changes
+]
+
+.pull-right[
+![](images/mutate.png)
+]
+
+
+---
+
+# `mutate` Example
+
+Introduce a variable `Rate` into the `fbi` data:
+
+
+```r
+fbi %&gt;% mutate(rate = count/population*90000) %&gt;% head()
+```
+
+```
+## # A tibble: 6 × 9
+##   state   state_id state_abbr  year population type         count viole…¹   rate
+##   &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;      &lt;int&gt;      &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;lgl&gt;    &lt;dbl&gt;
+## 1 Alabama        2 AL          1983    3959000 homicide       364 TRUE      8.27
+## 2 Alabama        2 AL          1983    3959000 rape_legacy    931 TRUE     21.2 
+## 3 Alabama        2 AL          1983    3959000 rape_revised    NA TRUE     NA   
+## 4 Alabama        2 AL          1983    3959000 robbery       3895 TRUE     88.5 
+## 5 Alabama        2 AL          1983    3959000 aggravated_… 11281 TRUE    256.  
+## 6 Alabama        2 AL          1983    3959000 burglary     42485 FALSE   966.  
+## # … with abbreviated variable name ¹​violent_crime
+```
+
+
+---
+
+# `arrange`
+
+`arrange` sorts a data set by the values in one or more variables
+
+Successive variables break ties in previous ones
+
+`desc` stands for descending, otherwise rows are sorted from smallest to largest
+
+
+```r
+fbi %&gt;% arrange(desc(year), type, desc(count)) %&gt;% head()
+```
+
+```
+## # A tibble: 6 × 8
+##   state      state_id state_abbr  year population type             count viole…¹
+##   &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;      &lt;int&gt;      &lt;int&gt; &lt;chr&gt;            &lt;int&gt; &lt;lgl&gt;  
+## 1 California        6 CA          2020   39368078 aggravated_ass… 113646 TRUE   
+## 2 Texas            48 TX          2020   29360759 aggravated_ass…  88810 TRUE   
+## 3 Florida          12 FL          2020   21733312 aggravated_ass…  60871 TRUE   
+## 4 New York         38 NY          2020   19336776 aggravated_ass…  46538 TRUE   
+## 5 Tennessee        47 TN          2020    6886834 aggravated_ass…  37412 TRUE   
+## 6 Michigan         26 MI          2020    9966555 aggravated_ass…  36384 TRUE   
+## # … with abbreviated variable name ¹​violent_crime
+```
+
+---
+
+# `select`
+
+.pull-left[
+Select specific variables of a data frame (vertical selection):
+
+
+`select (.data, ...)` 
+
+specify all variables you want to keep
+
+Variables can be selected by index, e.g. `1:5`, by name (don't use quotes), or using a selector function, such as 
+`starts_with`
+
+Negative selection also works, e.g. `-1` (not the first variable)
+]
+
+.pull-right[
+![](images/select.png)
+]
+
+
+---
+
+# `select` Example
+
+
+Select `type, count, state`, and `year` from the `fbi` data:
+
+
+```r
+fbi %&gt;% arrange(desc(year), type, desc(count)) %&gt;%
+  select(type, count, state, year) %&gt;% head()
+```
+
+```
+## # A tibble: 6 × 4
+##   type                count state       year
+##   &lt;chr&gt;               &lt;int&gt; &lt;chr&gt;      &lt;int&gt;
+## 1 aggravated_assault 113646 California  2020
+## 2 aggravated_assault  88810 Texas       2020
+## 3 aggravated_assault  60871 Florida     2020
+## 4 aggravated_assault  46538 New York    2020
+## 5 aggravated_assault  37412 Tennessee   2020
+## 6 aggravated_assault  36384 Michigan    2020
+```
+
+---
+class: inverse
+# Your turn
+
+Use the `fbiwide` data set from the `classdata` package
+
+Write out at least three different ways of selecting all variables describing incidences of different types of crimes
+
+---
+
+# `summarize`
+
+.pull-left[
+
+
+`summarize (.data, ...)` 
+
+summarize observations into a (set of) one-number statistic(s):
+
+Creates a new dataset with 1 row and one column for each of the summary statistics
+
+]
+
+.pull-right[
+![](images/summarize.png)
+]
+
+
+---
+
+# `summarise` Example
+
+Calculate the mean and standard deviation of Crime rates in the `fbi` data
+
+
+```r
+fbi %&gt;% 
+    summarise(mean_rate = mean(count/population*90000, na.rm=TRUE), 
+              sd_rate = sd(count/population*90000, na.rm = TRUE))
+```
+
+```
+## # A tibble: 1 × 2
+##   mean_rate sd_rate
+##       &lt;dbl&gt;   &lt;dbl&gt;
+## 1      467.    777.
+```
+
+---
+
+# `summarize` and `group_by`
+
+.pull-left[
+
+
+Power combo! 
+![](images/kapow.png)
+
+for each combination of group levels, create one row of a (set of) one-number statistic(s)
+
+The new dataset has  one column for each of the summary statistics, and one row for each combination of grouping levels (multiplicative)
+
+]
+
+.pull-right[
+![](images/summarize-groupby.png)
+]
+
+
+---
+
+# `summarise` and `group_by`
+
+For each type of crime, calculate average crime rate and standard deviation.
+
+
+```r
+fbi %&gt;%
+    group_by(type) %&gt;%
+    summarise(mean_rate = mean(count/population*90000, na.rm=TRUE), 
+              sd_rate = sd(count/population*90000, na.rm = TRUE))
+```
+
+```
+## # A tibble: 9 × 3
+##   type                mean_rate sd_rate
+##   &lt;chr&gt;                   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 aggravated_assault     253.    146.  
+## 2 arson                   24.1    15.2 
+## 3 burglary               770.    389.  
+## 4 homicide                 5.87    5.83
+## 5 larceny               2257.    749.  
+## 6 motor_vehicle_theft    317.    204.  
+## 7 rape_legacy             30.9    12.3 
+## 8 rape_revised            40.1    17.6 
+## 9 robbery                119.    126.
+```
+
+---
+class: inverse, center, middle
+# Let's use these tools
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

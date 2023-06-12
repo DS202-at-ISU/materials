@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Graphics with ggplot2</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Heike Hofmann" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Graphics with ggplot2
+### Heike Hofmann
+
+---
+
+class: inverse, middle, center
+# Looking at data
+
+---
+class: inverse, middle, center
+## Questions for the fbi data
+
+---
+
+## Plan for answers
+
+- Explore how one (or more) variables are distributed: *barchart or histogram*
+
+- Explore how two variables are related:  *scatterplot, boxplot, tile plot*
+
+- Explore how two variables are related, conditioned on other variables: *facetting, color &amp; other aesthetics*
+
+
+---
+
+## Different version of the data
+
+For the exploration, we will use a different shape of the `fbi` data - a wide form:
+
+
+```r
+library(classdata)
+str(fbiwide)
+```
+
+```
+## Classes 'tbl_df', 'tbl' and 'data.frame':	2164 obs. of  16 variables:
+##  $ state              : chr  "Alabama" "Alabama" "Alabama" "Alabama" ...
+##  $ state_id           : int  2 2 2 2 2 2 2 2 2 2 ...
+##  $ state_abbr         : chr  "AL" "AL" "AL" "AL" ...
+##  $ year               : int  1983 1985 1996 1997 1998 1999 2000 1995 1982 2015 ...
+##  $ population         : int  3959000 4021000 4273000 4319000 4352000 4369862 4447100 4253000 3943000 4853875 ...
+##  $ violent_crime      : int  16471 18398 24159 24379 22286 21421 21620 26894 17653 22957 ...
+##  $ homicide           : int  364 396 444 426 354 345 329 475 417 348 ...
+##  $ rape_legacy        : int  931 1079 1397 1396 1443 1513 1482 1350 1026 1449 ...
+##  $ rape_revised       : int  NA NA NA NA NA NA NA NA NA 2037 ...
+##  $ robbery            : int  3895 4237 7124 6931 5698 5297 5702 7900 4417 4612 ...
+##  $ aggravated_assault : int  11281 12686 15194 15626 14791 14266 14107 17169 11793 15960 ...
+##  $ property_crime     : int  145890 140115 181803 186809 177779 171398 180539 179294 165048 144785 ...
+##  $ burglary           : int  42485 41612 42821 43786 41965 38648 40331 43586 49531 35265 ...
+##  $ larceny            : int  94279 88108 123350 127616 120943 119616 127399 120967 104740 99182 ...
+##  $ motor_vehicle_theft: int  9126 10395 15632 15407 14871 13134 12809 14741 10777 10338 ...
+##  $ arson              : int  981 1074 944 829 671 589 634 879 1078 770 ...
+```
+
+---
+
+## Scatterplots
+
+- need two continuous variables
+
+- we'll be using the `ggplot2` framework for plotting
+
+---
+class: inverse, middle, center
+# Why `ggplot2`?
+
+---
+
+## Why `ggplot2`
+
+.pull-left[
+- Wildly popular package for statistical graphics: over 1.5 million **monthly**  downloads from CRAN since 2019 (several thousand times per day)
+
+- Developed by Hadley Wickham (An ISU Alumni)
+
+- Designed to adhere to good graphical practices
+
+- Constructs plots using the concept of layers
+
+- Supports a wide variety plot types and extensions
+]
+
+.pull-right[
+![](02_r-graphics_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+]
+
+
+&lt;br&gt;
+
+- http://ggplot2.org/book/ or Hadley's book *ggplot2: Elegant Graphics for Data Analysis* for reference 
+
+
+
+
+---
+
+## Grammar of Graphics
+
+A graphical representation (plot) consists of:
+
+1. **mappings** (`aes`):  data variables are mapped to graphical elements
+
+2. **layers**:  geometric elements (`geoms`, such as points, lines, 
+rectangles, text, ...) and statistical transformations (`stats`, are identity, counts, bins, ...)
+
+3. **scales**: map values in the data space to values in an aesthetic space (e.g. color, size, shape, but also position)
+
+4. **coordinate system** (`coord`): normally Cartesian, but pie charts use e.g. polar coordinates
+
+5. **facetting**: for small multiples (subsets) and their arrangement
+
+6. **theme**: fine-tune display items, such as font and its size, color of background, margins, ...
+
+---
+
+## Scatterplots in `ggplot2`
+
+`aes` allows us to specify mappings; scatterplots need a mapping for `x` and a mapping for `y`:
+
+```
+ggplot(data = fbiwide, aes(x = burglary, y = homicide)) +
+  geom_point()
+```  
+
+```
+ggplot(data = fbiwide, aes(x = log(burglary), y = log(homicide))) +
+  geom_point()
+```  
+
+```
+ggplot(data = fbiwide, aes(x = log(burglary), 
+                           y = log(motor_vehicle_theft))) +
+  geom_point()
+```  
+
+---
+
+## Revision - Interpreting Scatterplots
+
+- Big patterns
+    - Form and direction
+    - Strength
+    
+- Small patterns
+
+- Deviations from the pattern
+    - Outliers
+    
+---
+
+### **Form**
+
+Is the plot linear?  Is the plot curved?  Is there a distinct pattern in the plot? Are there multiple groups?
+
+
+### **Strength**
+
+Does the plot follow the form very closely?  Or is there a lot of variation?   
+
+### **Direction**
+Is the pattern increasing?  Is the plot decreasing?
+
+*Positively:* Above (below) average in one variable tends to be associated with above (below) average in another variable.
+
+*Negatively:* Opposite pattern.
+
+---
+
+&lt;img class="cover" src="images/positive.png" alt="" width=500&gt;
+
+&gt; 1. &lt;font color="darkorange"&gt;Form: Linear&lt;/font&gt;
+&gt; 2. &lt;font color="darkorange"&gt;Strength: Strong, very close to a straight line.&lt;/font&gt;
+&gt; 3. &lt;font color="darkorange"&gt;Direction: Two variables are positively associated.&lt;/font&gt;
+&gt; 4. &lt;font color="darkorange"&gt;No outliers.&lt;/font&gt;
+
+---
+
+&lt;img class="cover" src="images/negative.png" alt="" width=500&gt;
+
+&gt; 1. &lt;font color="darkorange"&gt;Form: Roughly linear, two distinct groups (more than 40% and less than 40%.)&lt;/font&gt;
+&gt; 2. &lt;font color="darkorange"&gt;Strength: not strong.  Data points are scattered.
+&lt;/font&gt;
+&gt; 3. &lt;font color="darkorange"&gt;Direction: Negatively Associated.
+&lt;/font&gt;
+&gt; 4. &lt;font color="darkorange"&gt;Outliers: None.&lt;/font&gt;
+
+---
+
+## Aesthetics
+
+Can map other variables to size or colour
+
+```
+ggplot(aes(x = log(burglary), y = log(motor_vehicle_theft),
+           colour=state), data=fbiwide) + geom_point()
+
+ggplot(aes(x = log(burglary), y = log(motor_vehicle_theft),
+           colour=year), data=fbiwide) + geom_point()
+```
+
+```
+ggplot(aes(x = log(burglary), y = log(motor_vehicle_theft),
+           size=population), data=fbiwide) + geom_point()
+```
+
+other aesthetics: shape
+
+---
+class: inverse
+## Your turn
+
+
+- Work through each of the `ggplot2` example plots
+
+- Note: you can turn off a legend (e.g. when there are 50 colors) by adding 
+` + theme(legend.position = "none")` to the plot command
+
+- Try variations of the plots to find answers to (some of) your questions. 
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
