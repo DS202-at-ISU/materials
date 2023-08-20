@@ -53,7 +53,7 @@
    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
    code span.at { color: #7d9029; } /* Attribute */
    code span.bn { color: #40a070; } /* BaseN */
-   code span.bu { } /* BuiltIn */
+   code span.bu { color: #008000; } /* BuiltIn */
    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
    code span.ch { color: #4070a0; } /* Char */
    code span.cn { color: #880000; } /* Constant */
@@ -66,7 +66,7 @@
    code span.ex { } /* Extension */
    code span.fl { color: #40a070; } /* Float */
    code span.fu { color: #06287e; } /* Function */
-   code span.im { } /* Import */
+   code span.im { color: #008000; font-weight: bold; } /* Import */
    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
    code span.op { color: #666666; } /* Operator */
@@ -81,7 +81,7 @@
   </style>
   
   
-      <script src="slides_files/header-attrs-2.14/header-attrs.js"></script>
+      <script src="slides_files/header-attrs-2.24/header-attrs.js"></script>
   
 </head>
 
@@ -106,6 +106,35 @@ Welcome to<br>DS 202
 class="title-slide slide level1">
 <h2>Data Acquisition and Exploratory Data Analysis</h2>
 
+</section>
+<section id="topics-of-today" class="slide level2">
+<h2>Topics of today!</h2>
+<ul>
+<li>Your instructor</li>
+<li>This course</li>
+<li>Skills and tools</li>
+<li>An example</li>
+</ul>
+</section>
+<section id="who-is-will-ju" class="slide level2">
+<h2>Who is Will Ju</h2>
+<ul>
+<li>Wangqian (Will) Ju
+<ul>
+<li>not a professor for sure</li>
+<li>not a doctor yet</li>
+</ul></li>
+<li>5th-year PhD student advised by Dr. Heike Hofmann</li>
+<li>R packages development
+<ul>
+<li>cmpsR</li>
+<li>ggpaintr</li>
+</ul></li>
+<li>industrial work experience
+<ul>
+<li>Machine learning engineer/Data scientist intern at Adobe</li>
+</ul></li>
+</ul>
 </section>
 <section id="what-is-this-course-about" class="slide level2">
 <h2>What is this course about?</h2>
@@ -216,10 +245,8 @@ web-app</li>
 </section>
 <section id="syllabus" class="slide level2">
 <h2>Syllabus</h2>
-<p>Full syllabus is available <a
-href="https://stat480-at-isu.github.io/syllabus.pdf">from the course
-website</a>.</p>
-<p>###Textbook (optional)</p>
+<p>Full syllabus is available on Canvas</p>
+<h3 id="textbook-optional">Textbook (optional)</h3>
 <ul>
 <li>Garrett Grolemund and Hadley Wickham: <em><a
 href="http://r4ds.had.co.nz/">R for Data Science</a></em></li>
@@ -277,7 +304,7 @@ href="https://ds202-at-isu.github.io/">https://ds202-at-isu.github.io/</a></li>
 <h2>Labs</h2>
 <ul>
 <li>during class time on every other Thursday (starting with Thursday,
-Sep 15th)</li>
+Sep 14th)</li>
 <li>you will be partnered (randomly) in groups of 3 to 4</li>
 <li>lab assignments are designed to be finished during class time, but
 ‘finishing touches’ can be applied until the following Monday,
@@ -301,7 +328,7 @@ new information.</li>
 <li>in-class programming exam.</li>
 <li>open book, open note, open internet (no direct help from anyone
 else).</li>
-<li>tentatively scheduled for Oct 27.</li>
+<li>tentatively scheduled for Oct 26.</li>
 <li>sample exams will be posted as we get closer to the date.</li>
 </ul>
 </section>
@@ -331,18 +358,30 @@ the computers. Make use of that time!</p>
 taker, talk to one of your team members, … )</li>
 </ol>
 </section>
-<section id="getting-help" class="slide level2">
-<h2>Getting Help</h2>
-<p>There’s lots of ways to get help in case you are stuck:</p>
-<ol type="1">
-<li>Google is your friend! in particular, stackoverflow and R help are
-usually great resources,</li>
-<li>ask a team member,</li>
-<li>write email to the instructor with your question</li>
-</ol>
+<section id="skills-and-tools" class="slide level2">
+<h2>Skills and tools</h2>
+<ul>
+<li>self-learning
+<ul>
+<li>identify the problem (a big problem -&gt; a series of small
+questions) and ask a good question</li>
+<li>gather and process related information/knowledge</li>
+<li>apply what you learned to see if it works (expected vs
+unexpected)</li>
+<li>seek the right help from the right person</li>
+</ul></li>
+<li>Github</li>
+<li>slack</li>
+<li>Large Language models (LLMs)
+<ul>
+<li>chatGPT</li>
+<li>…</li>
+</ul></li>
+</ul>
 </section>
-<section id="asking-a-good-question" class="slide level2">
-<h2>Asking a good question</h2>
+<section id="skills-and-tools-asking-a-good-question"
+class="slide level2">
+<h2>Skills and tools | Asking a good question</h2>
 <p>is a learned and valuable skill!</p>
 <p>Have a look at:</p>
 <ul>
@@ -351,6 +390,55 @@ href="http://stackoverflow.com/help/how-to-ask">Asking a good
 question</a></li>
 <li>R’s <a href="https://www.r-project.org/posting-guide.html">Posting
 guidelines</a></li>
+</ul>
+</section>
+<section id="skills-and-tools-gather-information" class="slide level2">
+<h2>Skills and tools | Gather information</h2>
+<ul>
+<li>Google</li>
+<li>medium</li>
+<li>stackoverflow</li>
+<li>R help</li>
+<li>LLM tools (with caution)</li>
+<li>…</li>
+</ul>
+</section>
+<section id="skills-and-tools-apply-what-you-learned"
+class="slide level2">
+<h2>Skills and tools | Apply what you learned</h2>
+<ul>
+<li>projects</li>
+<li>answer the questions that you are interested</li>
+<li>…</li>
+</ul>
+</section>
+<section id="skills-and-tools-seek-help" class="slide level2">
+<h2>Skills and tools | seek help</h2>
+<ul>
+<li>ask a team member,</li>
+<li>write email to the instructor with your question</li>
+<li>…</li>
+</ul>
+</section>
+<section id="skills-and-tools-slack" class="slide level2">
+<h2>Skills and tools | slack</h2>
+<ul>
+<li><a
+href="https://join.slack.com/t/ds202fall2023/shared_invite/zt-21fue3puf-XV~37aCQLJVx1E7Cp_GsLQ">slack
+invite link</a></li>
+<li>“messaging app for business that connects people to the information
+they need”</li>
+<li>fancy features</li>
+</ul>
+<p><img src="data/course_slack_qr.png" width=250></p>
+</section>
+<section id="skills-and-tools-large-language-models"
+class="slide level2">
+<h2>Skills and tools | Large Language Models</h2>
+<ul>
+<li>be replaced?</li>
+<li>do not fully trust it</li>
+<li>use it wisely</li>
 </ul>
 </section>
 <section id="what-is-this-class-about" class="slide level2">
@@ -377,12 +465,6 @@ Emissions (Carbon Footprint)</li>
 …</li>
 </ul>
 <p>Anything else you can think of?</p>
-</section>
-<section id="now-vote" class="slide level2">
-<h2>Now vote</h2>
-<p>Go to Wufoo Site to let me know your favorites and make suggestions:
-<a href="http://heike.wufoo.com/forms/topics-of-interest/"
-class="uri">http://heike.wufoo.com/forms/topics-of-interest/</a></p>
 </section>
 <section id="what-is-exploratory-data-analysis" class="slide level2">
 <h2>What is exploratory data analysis?</h2>
@@ -422,6 +504,15 @@ expectancy? </font></li>
 <li><font color="white">What else did you find? How much of this did you
 know before?</font></li>
 </ul>
+</section>
+<section id="todo" class="slide level2">
+<h2>TODO</h2>
+<ul>
+<li>(optional) watch the GapMinder TED talk</li>
+<li>sign up for slack using your iastate.edu email if you haven’t</li>
+<li>sign up for github using your iastate.edu email if you haven’t</li>
+</ul>
+<!-- https://join.slack.com/t/ds202fall2023/shared_invite/zt-21fue3puf-XV~37aCQLJVx1E7Cp_GsLQ -->
 </section>
 
   <!--

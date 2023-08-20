@@ -20,6 +20,25 @@ Welcome to<br>DS 202
 
 # Data Acquisition and Exploratory Data Analysis
 
+## Topics of today!
+
+* Your instructor
+* This course
+* Skills and tools
+* An example
+
+## Who is Will Ju
+
+* Wangqian (Will) Ju
+    + not a professor for sure
+    + not a doctor yet
+* 5th-year PhD student advised by Dr. Heike Hofmann
+* R packages development
+    + cmpsR
+    + ggpaintr
+* industrial work experience
+    + Machine learning engineer/Data scientist intern at Adobe
+
 ## What is this course about?
 
 * Data Acquisition
@@ -123,9 +142,9 @@ length(pkgs)
 
 ## Syllabus
 
-Full syllabus is available [from the course website](https://stat480-at-isu.github.io/syllabus.pdf).
+Full syllabus is available on Canvas
 
-###Textbook (optional)
+### Textbook (optional)
 
 - Garrett Grolemund and Hadley Wickham: *[R for Data Science](http://r4ds.had.co.nz/)*
 - Garrett Grolemund: *[Hands-On Programming with R](https://www.amazon.com/dp/1449359019/ref=cm_sw_su_dp)*
@@ -153,7 +172,7 @@ Course website:
 
 ## Labs
 
-- during class time on every other Thursday (starting with Thursday, Sep 15th) 
+- during class time on every other Thursday (starting with Thursday, Sep 14th) 
 - you will be partnered (randomly) in groups of 3 to 4
 - lab assignments are designed to be finished during class time, but 'finishing touches' can be applied until the following Monday, 10pm. 
 - if you cannot attend the lab, please let me know beforehand. Nevertheless, you are expected to do the work!
@@ -168,7 +187,7 @@ Course website:
 
 - in-class programming exam.
 - open book, open note, open internet (no direct help from anyone else).
-- tentatively scheduled for Oct 27.
+- tentatively scheduled for Oct 26.
 - sample exams will be posted as we get closer to the date.
 
 
@@ -191,16 +210,21 @@ If you have to miss class, please
 (a) let me know ahead of time. 
 (b) make sure to catch up with the material (e.g. have a designated note taker, talk to one of your team members, ... )
 
-## Getting Help
 
-There's lots of ways to get help in case you are stuck:
+## Skills and tools
 
-(1) Google is your friend! in particular, stackoverflow and R help are usually great resources,
-(2) ask a team member,
-(3) write email to the instructor with your question
+* self-learning
+    + identify the problem (a big problem -> a series of small questions) and ask a good question
+    + gather and process related information/knowledge
+    + apply what you learned to see if it works (expected vs unexpected)
+    + seek the right help from the right person
+* Github
+* slack
+* Large Language models (LLMs)
+    + chatGPT
+    + ...
 
-
-## Asking a good question
+## Skills and tools  |  Asking a good question
 
 is a learned and valuable skill!
 
@@ -209,6 +233,40 @@ Have a look at:
 - stackoverflow's [Asking a good question](http://stackoverflow.com/help/how-to-ask)
 - R's [Posting guidelines](https://www.r-project.org/posting-guide.html)
 
+## Skills and tools  |  Gather information
+
+* Google
+* medium
+* stackoverflow
+* R help
+* LLM tools (with caution)
+* ...
+
+## Skills and tools  |  Apply what you learned
+
+* projects
+* answer the questions that you are interested
+* ...
+
+## Skills and tools  |  seek help
+
+* ask a team member,
+* write email to the instructor with your question
+* ...
+
+## Skills and tools  |  slack
+
+* [slack invite link](https://join.slack.com/t/ds202fall2023/shared_invite/zt-21fue3puf-XV~37aCQLJVx1E7Cp_GsLQ)
+* "messaging app for business that connects people to the information they need"
+* fancy features
+
+<img src="data/course_slack_qr.png" width=250>
+
+## Skills and tools  |  Large Language Models
+
+* be replaced? 
+* do not fully trust it
+* use it wisely
 
 ## What is this class about?
 
@@ -229,11 +287,6 @@ Climate/Weather Data
 
 Anything else you can think of?
 
-
-## Now vote
-
-Go to Wufoo Site to let me know your favorites and make suggestions:
-http://heike.wufoo.com/forms/topics-of-interest/ 
 
 ## What is exploratory data analysis?
 
@@ -267,3 +320,11 @@ Statistician Hans Rosling (1948 - 2017) presented [GapMinder at TED 2006](https:
 - <font color="white">How is income generally related to life expectancy?
 </font>
 - <font color="white">What else did you find? How much of this did you know before?</font>
+
+## TODO after today's lecture
+
+* (optional) watch the GapMinder TED talk
+* sign up for slack using your iastate.edu email if you haven't
+* sign up for github using your iastate.edu email if you haven't 
+
+<!-- https://join.slack.com/t/ds202fall2023/shared_invite/zt-21fue3puf-XV~37aCQLJVx1E7Cp_GsLQ -->
