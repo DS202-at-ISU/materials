@@ -2,7 +2,8 @@
 title: "DS 202 - Working in teams: Sample solution for the test case"
 author: "Your Name"
 output:
-  word_document
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}

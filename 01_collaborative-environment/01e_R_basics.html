@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>DS 202 - Tools of the Trade</title>
+    <title>R Basics</title>
     <meta charset="utf-8" />
     <meta name="author" content="Will Ju" />
+    <meta name="date" content="2023-08-23" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
@@ -13,103 +14,158 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# DS 202 - Tools of the Trade
+# R Basics
 ]
 .author[
 ### Will Ju
 ]
+.date[
+### 2023-08-23
+]
 
 ---
 
 
 
 
+# vectors and lists
 
-In this class we will use 
+Vectors and lists are the most basic building structures of `R`
 
-- R and RStudio: make sure you have newish versions installed  (&gt;= R 4.0.x; RStudio 2021 or later) 
++ vector
 
-- markdown and Rmarkdown, see [Rstudio cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf) 
 
-- git &amp; github resources
+```r
+num_vec &lt;- c(1, 2, 3)
 
-    - Jenny Bryan's: Happy Git with R http://happygitwithr.com/
-    
-    - Data Carpentry's tutorials: https://github.com/datacarpentry
-    
-    - Reproducible Science Curriculum intitative: https://github.com/Reproducible-Science-Curriculum
-    
- &lt;!--   - Small 'mind map' of git functionality: https://rachelcarmena.github.io--&gt;
+char_vec &lt;- c('apple', 'banana', 'c')
+
+bool_vec &lt;- c(TRUE, FALSE, TRUE)
+```
 
 ---
 
-# Outline for today
++ list
 
-- install / update R and RStudio
 
-- do a data exploration
+```r
+will &lt;- list(
+  name = 'Will',
+  age = 27,
+  lives_in_Ames = TRUE
+)
 
-- install git / github and link it to RStudio
+will
+```
 
----
-
-# Installing R
-
-- Make sure to have R version 4.x.x installed
-
-- Go to [http://www.r-project.org/](http://www.r-project.org/)
-- Click the CRAN link on the left, and pick a download site (0-Cloud is a good choice)
-- Choose link based on your OS
-- On Windows, choose the "base" subdirectory to install R.
-- On OS X, choose the .pkg file to install R.
-
----
-
-# Installing RStudio
-
-- RStudio-2023  supports both R and python (Jupyter notebooks)
-
-- Browse to [https://posit.co/](https://posit.co/)
-- Click DOWNLOAD RSTUDIO
-- Click Download RStudio Desktop
-- Choose the installer appropriate for your platform
-
+```
+## $name
+## [1] "Will"
+## 
+## $age
+## [1] 27
+## 
+## $lives_in_Ames
+## [1] TRUE
+```
 
 ---
 
-# RStudio is ...
+# control structures
 
-- an excellent IDE for R (and python)
-
-[From Julie Lowndes, Data Scientist at Openscapes](http://jules32.github.io/resources/RStudio_intro/):  
-
-&lt;blockquote&gt;
-&lt;b&gt;If R were an airplane, RStudio would be the airport&lt;/b&gt;, providing many, many supporting services that make it easier for you, the pilot, to take off and go to awesome places. Sure, you can fly an airplane without an airport, but having those runways and supporting infrastructure is a game-changer.
-&lt;/blockquote&gt;
-
----
-
-## The RStudio IDE
-
-&lt;img class="cover" src="images/rstudio-panes.png" alt=""&gt;
++ if statements
++ for statements
++ while statements
++ repeat statements
++ break and next statements
++ switch statements
 
 ---
 
-## The RStudio IDE
+# control structures
+
++ if statements
 
 
-1. **Source editor:** Docking station for multiple files, Useful shortcuts ("Knit"), Highlighting/Tab-completion, Code-checking (R, HTML, JS), Debugging features  
+```r
+if (will$lives_in_Ames) {
+  print("Ames is good")
+}
+```
 
-2. **Console window:** Highlighting/Tab-completion, Context help, Search recent commands
+```
+## [1] "Ames is good"
+```
 
-3. **Environment pane:** Tools for package development, git, etc
++ for statements
 
-4. **Other tabs/panes:** Graphics, R documentation, File system navigation/access
 
-&lt;br&gt;
-&lt;br&gt;
+```r
+for (num in num_vec) {
+  print(num)
+}
+```
 
-*Protip:* save yourself the headaches figuring out file paths and instead work in an RStudio R project (popup menu at the top left)
+```
+## [1] 1
+## [1] 2
+## [1] 3
+```
+
+---
+
+# user-defined functions
+
+
+```r
+plus_a_b &lt;- function(arg1, arg2) {
+  arg1 + arg2
+}
+
+plus_a_b(3, 10)
+```
+
+```
+## [1] 13
+```
+
+---
+
+# pipe operator
+
+`obj %&gt;% function(arg2)` is equivalent to `function(obj, org2)`
+
+
+```r
+3 %&gt;% plus_a_b(10)
+```
+
+```
+## [1] 13
+```
+
+---
+
+# dataframe
+
+
+```r
+data("mtcars")
+
+head(mtcars)
+```
+
+```
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+```
+
+---
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

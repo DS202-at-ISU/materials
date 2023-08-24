@@ -1,6 +1,6 @@
 ---
 title: "DS 202 - Tools of the Trade"
-author: "Heike Hofmann"
+author: "Will Ju"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -17,7 +17,7 @@ options(htmltools.dir.version = FALSE)
 
 In this class we will use 
 
-- R and RStudio: make sure you have newish versions installed  (R 4.0.x; RStudio 2021 or later) 
+- R and RStudio: make sure you have newish versions installed  (>= R 4.0.x; RStudio 2021 or later) 
 
 - markdown and Rmarkdown, see [Rstudio cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf) 
 
@@ -57,11 +57,10 @@ In this class we will use
 
 # Installing RStudio
 
-- RStudio-2022  supports both R and python (Jupyter notebooks)
+- RStudio-2023  supports both R and python (Jupyter notebooks)
 
-- Browse to [https://www.rstudio.com/](https://www.rstudio.com/)
-- Mouse over Products and click RStudio
-- Choose RStudio Desktop
+- Browse to [https://posit.co/](https://posit.co/)
+- Click DOWNLOAD RSTUDIO
 - Click Download RStudio Desktop
 - Choose the installer appropriate for your platform
 

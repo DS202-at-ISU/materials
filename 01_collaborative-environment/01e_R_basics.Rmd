@@ -1,0 +1,110 @@
+---
+title: "R Basics"
+author: "Will Ju"
+date: "`r Sys.Date()`"
+output: 
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(tidyverse)
+```
+
+# vectors and lists
+
+Vectors and lists are the most basic building structures of `R`
+
++ vector
+
+```{r}
+num_vec <- c(1, 2, 3)
+
+char_vec <- c('apple', 'banana', 'c')
+
+bool_vec <- c(TRUE, FALSE, TRUE)
+```
+
+---
+
++ list
+
+```{r}
+will <- list(
+  name = 'Will',
+  age = 27,
+  lives_in_Ames = TRUE
+)
+
+will
+```
+
+---
+
+# control structures
+
++ if statements
++ for statements
++ while statements
++ repeat statements
++ break and next statements
++ switch statements
+
+---
+
+# control structures
+
++ if statements
+
+```{r}
+if (will$lives_in_Ames) {
+  print("Ames is good")
+}
+```
+
++ for statements
+
+```{r}
+for (num in num_vec) {
+  print(num)
+}
+```
+
+---
+
+# user-defined functions
+
+```{r}
+plus_a_b <- function(arg1, arg2) {
+  arg1 + arg2
+}
+
+plus_a_b(3, 10)
+```
+
+---
+
+# pipe operator
+
+`obj %>% function(arg2)` is equivalent to `function(obj, org2)`
+
+```{r}
+3 %>% plus_a_b(10)
+```
+
+---
+
+# dataframe
+
+```{r}
+data("mtcars")
+
+head(mtcars)
+```
+
+---
