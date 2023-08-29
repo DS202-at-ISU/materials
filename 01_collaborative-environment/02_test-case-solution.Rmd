@@ -1,6 +1,6 @@
 ---
 title: "DS 202 - Working in teams: Sample solution for the test case"
-author: "Heike Hofmann"
+author: "Will Ju"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -51,7 +51,7 @@ class: inverse
 
 0. Setup 
 
-    - this solution uses R v4.1.2 in RStudio (2022.07.1 Build 554). 
+    - this solution uses R v4.2.3 in RStudio (2023.06.2 Build 561). 
     - You need the R packages `tidyverse` and `rmarkdown` to run the solution
     - use the command `install.packages(c("tidyverse","rmarkdown"))` 
     in the R console to install the two packages
