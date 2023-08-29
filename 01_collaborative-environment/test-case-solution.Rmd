@@ -180,18 +180,7 @@ iowa %>%
 
 ## Recap 2
 
-4.  the solution is disseminated from an R Markdown document, located at [a github repo](https://github.com/Stat585-at-ISU/materials-2019/tree/master/01_collaborative-environment).
-5.  code and text/documentation are interwoven: reproducible and self-documenting.
-6.  extend or refine analyses by copying and modifying code blocks.
-7.  disseminate your work by sharing the RMarkdown file
-8.  ghjchjgdhgj
-
-dfsghghjdsfhjgdsfjkhdsfhjkjkhdsfjkhsfhj
-
-```{r}
-1+1
-```
-
-```{python}
-
-```
+1.  the solution is disseminated from an R Markdown document, located at [a github repo](https://github.com/Stat585-at-ISU/materials-2019/tree/master/01_collaborative-environment).
+2.  code and text/documentation are interwoven: reproducible and self-documenting.
+3.  extend or refine analyses by copying and modifying code blocks.
+4.  disseminate your work by sharing the RMarkdown file
