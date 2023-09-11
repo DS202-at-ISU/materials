@@ -1,6 +1,6 @@
 ---
 title: "More graphics with ggplot2"
-author: Heike Hofmann
+author: Will Ju
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
@@ -205,7 +205,7 @@ class: inverse
 
 - reference/document: http://ggplot2.tidyverse.org/reference/
 
-- RStudio cheat sheet for [ggplot2](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- RStudio cheat sheet for [ggplot2](https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1*1otqt7q*_ga*MTI3NTQxNjE5Mi4xNjkxNjM0NjQw*_ga_2C0WZ1JHG0*MTY5NDQ3MzE5My45LjAuMTY5NDQ3MzE5My4wLjAuMA..)
 
 - ggplot2 mailing list: 
 https://groups.google.com/forum/?fromgroups#!forum/ggplot2
