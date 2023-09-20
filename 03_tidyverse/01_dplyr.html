@@ -3,8 +3,8 @@
   <head>
     <title>Intro to the tidyverse</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Heike Hofmann" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <meta name="author" content="Will Ju" />
+    <script src="libs/header-attrs-2.24/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
@@ -12,8 +12,12 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Intro to the tidyverse
-### Heike Hofmann
+]
+.author[
+### Will Ju
+]
 
 ---
 
@@ -217,15 +221,14 @@ fbi %&gt;% mutate(rate = count/population*90000) %&gt;% head()
 
 ```
 ## # A tibble: 6 × 9
-##   state   state_id state_abbr  year population type         count viole…¹   rate
-##   &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;      &lt;int&gt;      &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;lgl&gt;    &lt;dbl&gt;
-## 1 Alabama        2 AL          1983    3959000 homicide       364 TRUE      8.27
-## 2 Alabama        2 AL          1983    3959000 rape_legacy    931 TRUE     21.2 
-## 3 Alabama        2 AL          1983    3959000 rape_revised    NA TRUE     NA   
-## 4 Alabama        2 AL          1983    3959000 robbery       3895 TRUE     88.5 
-## 5 Alabama        2 AL          1983    3959000 aggravated_… 11281 TRUE    256.  
-## 6 Alabama        2 AL          1983    3959000 burglary     42485 FALSE   966.  
-## # … with abbreviated variable name ¹​violent_crime
+##   state   state_id state_abbr  year population type   count violent_crime   rate
+##   &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;      &lt;int&gt;      &lt;int&gt; &lt;chr&gt;  &lt;int&gt; &lt;lgl&gt;          &lt;dbl&gt;
+## 1 Alabama        2 AL          1983    3959000 homic…   364 TRUE            8.27
+## 2 Alabama        2 AL          1983    3959000 rape_…   931 TRUE           21.2 
+## 3 Alabama        2 AL          1983    3959000 rape_…    NA TRUE           NA   
+## 4 Alabama        2 AL          1983    3959000 robbe…  3895 TRUE           88.5 
+## 5 Alabama        2 AL          1983    3959000 aggra… 11281 TRUE          256.  
+## 6 Alabama        2 AL          1983    3959000 burgl… 42485 FALSE         966.
 ```
 
 
@@ -246,15 +249,14 @@ fbi %&gt;% arrange(desc(year), type, desc(count)) %&gt;% head()
 
 ```
 ## # A tibble: 6 × 8
-##   state      state_id state_abbr  year population type             count viole…¹
-##   &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;      &lt;int&gt;      &lt;int&gt; &lt;chr&gt;            &lt;int&gt; &lt;lgl&gt;  
-## 1 California        6 CA          2020   39368078 aggravated_ass… 113646 TRUE   
-## 2 Texas            48 TX          2020   29360759 aggravated_ass…  88810 TRUE   
-## 3 Florida          12 FL          2020   21733312 aggravated_ass…  60871 TRUE   
-## 4 New York         38 NY          2020   19336776 aggravated_ass…  46538 TRUE   
-## 5 Tennessee        47 TN          2020    6886834 aggravated_ass…  37412 TRUE   
-## 6 Michigan         26 MI          2020    9966555 aggravated_ass…  36384 TRUE   
-## # … with abbreviated variable name ¹​violent_crime
+##   state      state_id state_abbr  year population type       count violent_crime
+##   &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;      &lt;int&gt;      &lt;int&gt; &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;        
+## 1 California        6 CA          2020   39368078 aggravat… 113646 TRUE         
+## 2 Texas            48 TX          2020   29360759 aggravat…  88810 TRUE         
+## 3 Florida          12 FL          2020   21733312 aggravat…  60871 TRUE         
+## 4 New York         38 NY          2020   19336776 aggravat…  46538 TRUE         
+## 5 Tennessee        47 TN          2020    6886834 aggravat…  37412 TRUE         
+## 6 Michigan         26 MI          2020    9966555 aggravat…  36384 TRUE
 ```
 
 ---
@@ -455,6 +457,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
