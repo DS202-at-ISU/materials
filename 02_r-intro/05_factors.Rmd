@@ -1,6 +1,6 @@
 ---
 title: "DS 202: Factor variables"
-author: Heike Hofmann
+author: Will Ju
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -184,7 +184,7 @@ levels(fbi$type)
 
 - Wickham & Grolemund's <a href="http://r4ds.had.co.nz/factors.html">chapter on factors</a> in *R for Data Science*
 
-- Roger Peng: [*stringsAsFactors: An unauthorized biography*](http://simplystatistics.org/2015/07/24/stringsasfactors-an-unauthorized-biography/")
+- Roger Peng: [*stringsAsFactors: An unauthorized biography*](https://simplystatistics.org/posts/2015-07-24-stringsasfactors-an-unauthorized-biography/)
 
 - Thomas Lumley: <a href="http://notstatschat.tumblr.com/post/124987394001/stringsasfactors-sigh"><em>stringsAsFactors = &lt;sigh&gt;</em></a> 
 
