@@ -1,6 +1,6 @@
 ---
 title: "Reshaping data with tidyr - working with separate and unite"
-author: "Heike Hofmann"
+author: "Will Ju"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -31,7 +31,7 @@ parse_number(x)
 class: inverse
 # Your Turn
 
-Work on the previously created data frame `deaths` (Avengers).
+Work on the previously created data frame `deaths` (Avengers). The description of the data is here [https://github.com/fivethirtyeight/data/tree/master/avengers](https://github.com/fivethirtyeight/data/tree/master/avengers)
 
 ```{r echo=FALSE, include=FALSE, message = FALSE}
 library(tidyverse)
