@@ -3,8 +3,8 @@
   <head>
     <title>Dates and times</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Heike Hofmann" />
-    <script src="libs/header-attrs-2.17/header-attrs.js"></script>
+    <meta name="author" content="Will Ju" />
+    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
@@ -12,8 +12,12 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Dates and times
-### Heike Hofmann
+]
+.author[
+### Will Ju
+]
 
 ---
 
@@ -37,7 +41,7 @@ class: middle, inverse, center
 
 # Converter functions and instants in time
 
-- time instants: one (absolute) moment in time, e.g. `now()`, `Jan-1-2000`
+- time instants: one (absolute) moment in time, e.g. `now()`
 
 - easy-to-use converter functions: 
     - date: `ymd`, `mdy`, `dmy`, ...
@@ -80,6 +84,8 @@ class: inverse
 
 
 ```r
+# url &lt;- "https://github.com/ds202-at-ISU/materials/blob/master/03_tidyverse/data/ames-liquor.rds?raw=TRUE"
+# download.file(url, "data/ames-liquor.rds", mode="wb")
 ames &lt;- readRDS("data/ames-liquor.rds")
 
 summary(ames$Date) # pretty uninformative 
@@ -119,7 +125,7 @@ month(now())
 ```
 
 ```
-## [1] 11
+## [1] 10
 ```
 
 ```r
@@ -148,7 +154,7 @@ span
 ```
 
 ```
-## [1] "2021-11-01 07:22:56 CDT"
+## [1] "2022-10-31 08:04:39 CDT"
 ```
 
 ```r
@@ -156,7 +162,7 @@ end_date - days(10)
 ```
 
 ```
-## [1] "2022-10-22 07:22:56 CDT"
+## [1] "2023-10-21 08:04:39 CDT"
 ```
 
 
@@ -170,18 +176,6 @@ Use the `ames` data  to answer the following questions:
 
 - find the weekday associated with each date in the data. Introduce a variable `weekday` into the dataset. What is the number of sales by weekday? What is the volume of alcohol sold? Does that pattern hold over the years?
 
----
-
-# Your Turn code
-
-
-```r
-ames %&gt;% ggplot(aes(x = year(Date))) + geom_bar()
-ames %&gt;% ggplot(aes(x = year(Date), weight = `Volume Sold (Gallons)`)) + geom_bar()
-ames %&gt;% ggplot(aes(x = wday(Date, label=TRUE))) + geom_bar()
-ames %&gt;% ggplot(aes(x = wday(Date, label=TRUE), weight=`Volume Sold (Gallons)`)) + geom_bar() + 
-  facet_wrap(~year(Date))
-```
 
 ---
 
@@ -202,7 +196,7 @@ ames %&gt;%
   ylab("Volume of alcohol sold (in thousands of  Gallons)")
 ```
 
-![](04_lubridate_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+![](04_lubridate_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
 
 ---
 class: inverse
@@ -227,7 +221,10 @@ ames %&gt;%
 ```
 
 ```
-## Warning: All formats failed to parse. No formats found.
+## Warning: There was 1 warning in `mutate()`.
+## ℹ In argument: `Date = mdy(Date)`.
+## Caused by warning:
+## ! All formats failed to parse. No formats found.
 ```
 
 ```
@@ -289,6 +286,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

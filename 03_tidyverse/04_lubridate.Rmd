@@ -1,6 +1,6 @@
 ---
 title: "Dates and times"
-author: "Heike Hofmann"
+author: "Will Ju"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -33,7 +33,7 @@ library(lubridate)
 
 # Converter functions and instants in time
 
-- time instants: one (absolute) moment in time, e.g. `now()`, `Jan-1-2000`
+- time instants: one (absolute) moment in time, e.g. `now()`
 
 - easy-to-use converter functions: 
     - date: `ymd`, `mdy`, `dmy`, ...
@@ -70,6 +70,8 @@ class: inverse
 # Example: Ames Liquor Sales
 
 ```{r, message=FALSE}
+# url <- "https://github.com/ds202-at-ISU/materials/blob/master/03_tidyverse/data/ames-liquor.rds?raw=TRUE"
+# download.file(url, "data/ames-liquor.rds", mode="wb")
 ames <- readRDS("data/ames-liquor.rds")
 
 summary(ames$Date) # pretty uninformative 
@@ -122,17 +124,6 @@ Use the `ames` data  to answer the following questions:
 
 - find the weekday associated with each date in the data. Introduce a variable `weekday` into the dataset. What is the number of sales by weekday? What is the volume of alcohol sold? Does that pattern hold over the years?
 
----
-
-# Your Turn code
-
-```{r, eval=FALSE}
-ames %>% ggplot(aes(x = year(Date))) + geom_bar()
-ames %>% ggplot(aes(x = year(Date), weight = `Volume Sold (Gallons)`)) + geom_bar()
-ames %>% ggplot(aes(x = wday(Date, label=TRUE))) + geom_bar()
-ames %>% ggplot(aes(x = wday(Date, label=TRUE), weight=`Volume Sold (Gallons)`)) + geom_bar() + 
-  facet_wrap(~year(Date))
-```
 
 ---
 
