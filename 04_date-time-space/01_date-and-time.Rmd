@@ -1,6 +1,6 @@
 ---
 title: "DS 202 - Date and Time"
-author: "Heike Hofmann"
+author: "Will Ju"
 ratio: 16x10
 output:
   rmdshower::shower_presentation:

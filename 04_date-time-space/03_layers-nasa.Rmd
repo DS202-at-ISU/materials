@@ -1,6 +1,6 @@
 ---
 title: "Layers of plots"
-author: "Heike Hofmann"
+author: "Will Ju"
 output:
   xaringan::moon_reader:
     nature:

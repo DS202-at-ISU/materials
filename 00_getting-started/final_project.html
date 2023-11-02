@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Layers of plots</title>
+    <title>DS 202 Final Projects</title>
     <meta charset="utf-8" />
     <meta name="author" content="Will Ju" />
-    <script src="03_layers-nasa_files/header-attrs-2.25/header-attrs.js"></script>
-    <link href="03_layers-nasa_files/remark-css-0.0.1/default.css" rel="stylesheet" />
-    <link href="03_layers-nasa_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <script src="final_project_files/header-attrs-2.25/header-attrs.js"></script>
+    <link href="final_project_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="final_project_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
 .title[
-# Layers of plots
+# DS 202 Final Projects
 ]
 .author[
 ### Will Ju
@@ -21,167 +21,59 @@ class: center, middle, inverse, title-slide
 
 ---
 
-class: middle, inverse, center
-# Layers in `ggplot2`
 
 
 
----
+## Final projects
 
-# Outline
-
-- grammar of graphics, again
-
-- layer specifications
-
+-   team based project (3 - 4 members)
+-   maximum of 5 members, larger teams are expected to deliver longer report
 
 ---
 
-# Grammar of Graphics
+## Timeline
 
-A graphical representation (plot) consists of:
-
-1. **mappings** (`aes`):  data variables are mapped to graphical elements
-
-2. **layers**:  geometric elements (`geoms`, such as points, lines, rectangles, text, ...) and statistical transformations (`stats`, are identity, counts, bins, ...)
-
-3. **scales**: map values in the data space to values in an aesthetic space (e.g. color, size, shape, but also position)
-
-4. **coordinate system** (`coord`): normally Cartesian, but pie charts use e.g. polar coordinates
-
-5. **facetting**: for small multiples (subsets) and their arrangement
-
-6. **theme**: fine-tune display items, such as font and its size, color of background, margins, ...
-
-
+-   Nov 10: submit project proposal
+-   Nov 24: submit first draft
+-   Dec 5: final presentation
+-   Final week: submit final report
 
 ---
 
-# Layers
+## Project proposal
 
-each layer has several parts, the two most important are:
-
-- mapping: using the `aes()` function, we specify mappings between variables and aesthetics of the chart
-
-- `data`: the dataset used in the layer 
-
-`ggplot` is the layer that sets the defaults, &lt;br&gt;
-
-`geom_XXX` creates a layer: for each aspect it either uses the default or has to specify its own
+-   Research topic (title)
+-   Team members
+-   Data
+-   Questions to be addressed
 
 ---
 
-# Previous example
+## Final report
 
-
-```r
-data(nasa, package="GGally")
-nasa %&gt;% filter(id=="1-1") %&gt;%
-  ggplot(aes(x = date, y= temperature)) + geom_point()
-```
-
-![](03_layers-nasa_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
-
----
-
-# Connecting the points
-
-
-```r
-nasa %&gt;% filter(id=="1-1") %&gt;%
-  ggplot(aes(x = date, y= temperature)) + geom_point() +
-  geom_line()
-```
-
-![](03_layers-nasa_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+-   Introduction / background
+-   Data
+    -   Could include data processing
+-   Methods if applicable
+-   Results
+    -   Your findings
+-   Conclusion
 
 ---
 
-# Adding a trend line
+## 
 
-
-```r
-nasa %&gt;% filter(id=="1-1") %&gt;%
-  ggplot(aes(x = date, y= temperature)) + geom_point() +
-  geom_line() +
-  geom_smooth(method="lm", se=FALSE)
-```
-
-```
-## `geom_smooth()` using formula = 'y ~ x'
-```
-
-![](03_layers-nasa_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+-   [Joining The Avengers Is As Deadly As Jumping Off A Four-Story Building
+](https://fivethirtyeight.com/features/avengers-death-comics-age-of-ultron/)
 
 
 
----
-
-# Adding additional text
-
-
-```r
-nasa %&gt;% filter(id=="1-1") %&gt;%
-  ggplot(aes(x = date, y= temperature)) + geom_point() +
-  geom_line() +
-  geom_smooth(method="lm", se=FALSE) +
-  geom_text(aes(label = time, x = date+weeks(4)))
-```
-
-```
-## `geom_smooth()` using formula = 'y ~ x'
-```
-
-![](03_layers-nasa_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
-
----
-
-# Labelling specific text
-
-
-```r
-nasa %&gt;% filter(id=="1-1") %&gt;%
-  ggplot(aes(x = date, y= temperature)) + geom_point() +
-  geom_line() +
-  geom_smooth(method="lm", se=FALSE) +
-  geom_text(aes(label = time, x = date+weeks(4)),
-            nasa %&gt;% filter(id=="1-1", temperature &gt; 298))
-```
-
-```
-## `geom_smooth()` using formula = 'y ~ x'
-```
-
-![](03_layers-nasa_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
-
----
-
-# Default versus Layer Specification
-
-
-```r
-nasa %&gt;% filter(id=="1-1") %&gt;%
-  ggplot(aes(x = time, y= temperature)) + geom_point() +
-  geom_line() +
-  geom_text(aes(label=id, colour=id),  
-            data=nasa %&gt;% filter(id=="1-1", time==50))
-```
-
-![](03_layers-nasa_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
-
----
 
 
 
-```r
-nasa %&gt;% filter(id=="1-1") %&gt;%
-  ggplot(aes(x = time, y= temperature, colour=id)) + geom_point() +
-  geom_line() +
-  geom_text(aes(label=id), 
-            data=nasa %&gt;% filter(id=="1-1", time==50))
-```
 
-![](03_layers-nasa_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+
 
 
     </textarea>

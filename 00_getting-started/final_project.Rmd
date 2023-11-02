@@ -1,0 +1,67 @@
+---
+title: "DS 202 Final Projects"
+author: "Will Ju"
+output:
+  xaringan::moon_reader:
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Final projects
+
+-   team based project (3 - 4 members)
+-   maximum of 5 members, larger teams are expected to deliver longer report
+
+---
+
+## Timeline
+
+-   Nov 10: submit project proposal
+-   Nov 24: submit first draft
+-   Dec 5: final presentation
+-   Final week: submit final report
+
+---
+
+## Project proposal
+
+-   Research topic (title)
+-   Team members
+-   Data
+-   Questions to be addressed
+
+---
+
+## Final report
+
+-   Introduction / background
+-   Data
+    -   Could include data processing
+-   Methods if applicable
+-   Results
+    -   Your findings
+-   Conclusion
+
+---
+
+## 
+
+-   [Joining The Avengers Is As Deadly As Jumping Off A Four-Story Building
+](https://fivethirtyeight.com/features/avengers-death-comics-age-of-ultron/)
+
+
+
+
+
+
+
+
+
+
+
