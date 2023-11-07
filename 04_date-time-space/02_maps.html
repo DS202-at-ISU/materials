@@ -3,8 +3,8 @@
   <head>
     <title>Drawing Maps</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Heike Hofmann" />
-    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <meta name="author" content="Will Ju" />
+    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
@@ -12,8 +12,12 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Drawing Maps
-### Heike Hofmann
+]
+.author[
+### Will Ju
+]
 
 ---
 
@@ -170,15 +174,14 @@ head(fbi14)
 
 ```
 ## # A tibble: 6 × 8
-##   state   state_id state_abbr  year population type               count violen…¹
-##   &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;      &lt;int&gt;      &lt;int&gt; &lt;chr&gt;              &lt;int&gt; &lt;lgl&gt;   
-## 1 Alabama        2 AL          2014    4846411 homicide             276 TRUE    
-## 2 Alabama        2 AL          2014    4846411 rape_legacy         1425 TRUE    
-## 3 Alabama        2 AL          2014    4846411 rape_revised        2005 TRUE    
-## 4 Alabama        2 AL          2014    4846411 robbery             4702 TRUE    
-## 5 Alabama        2 AL          2014    4846411 aggravated_assault 13744 TRUE    
-## 6 Alabama        2 AL          2014    4846411 burglary           39723 FALSE   
-## # … with abbreviated variable name ¹​violent_crime
+##   state   state_id state_abbr  year population type          count violent_crime
+##   &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;      &lt;int&gt;      &lt;int&gt; &lt;chr&gt;         &lt;int&gt; &lt;lgl&gt;        
+## 1 Alabama        2 AL          2014    4846411 homicide        276 TRUE         
+## 2 Alabama        2 AL          2014    4846411 rape_legacy    1425 TRUE         
+## 3 Alabama        2 AL          2014    4846411 rape_revised   2005 TRUE         
+## 4 Alabama        2 AL          2014    4846411 robbery        4702 TRUE         
+## 5 Alabama        2 AL          2014    4846411 aggravated_a… 13744 TRUE         
+## 6 Alabama        2 AL          2014    4846411 burglary      39723 FALSE
 ```
 
 ---
@@ -241,6 +244,17 @@ unique(nomatch2$state)
 
 ```r
 fbi.map &lt;- fbi14 %&gt;% left_join(states, by="region")
+```
+
+```
+## Warning in left_join(., states, by = "region"): Detected an unexpected many-to-many relationship between `x` and `y`.
+## ℹ Row 1 of `x` matches multiple rows in `y`.
+## ℹ Row 1 of `y` matches multiple rows in `x`.
+## ℹ If a many-to-many relationship is expected, set `relationship =
+##   "many-to-many"` to silence this warning.
+```
+
+```r
 fbi.map %&gt;% filter(type=="burglary") %&gt;% 
   ggplot(aes(x = long, y = lat, fill=count/population*100000)) +
   geom_polygon(aes(group=group))
@@ -308,6 +322,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
