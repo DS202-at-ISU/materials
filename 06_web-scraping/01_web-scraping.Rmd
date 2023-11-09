@@ -1,6 +1,6 @@
 ---
 title: "DS 202 - Web Scraping"
-author: "Heike Hofmann"
+author: "Will Ju"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -35,7 +35,7 @@ library(tidyverse)
 
 ```{r warning = FALSE, message = FALSE}
 library(rvest)
-url <- "https://en.wikipedia.org/wiki/2022_Baseball_Hall_of_Fame_balloting"
+url <- "https://en.wikipedia.org/wiki/2023_Baseball_Hall_of_Fame_balloting"
 html <- read_html(url)
 html
 ```
@@ -72,7 +72,7 @@ class: inverse
 
 # Your Turn
 
-Go to the site https://bbwaa.com/22-hof/#votingtable
+Go to the site https://bbwaa.com/23-hof/#votingtable
 
 Read all tables from this website
 
@@ -83,7 +83,7 @@ Which source should we use?
 # Your Turn - Reading Data
 
 ```{r}
-hof <- "https://bbwaa.com/22-hof/#votingtable"
+hof <- "https://bbwaa.com/23-hof/#votingtable"
 html <- read_html(hof)
 
 hof_tbl <- html %>% html_table()
@@ -106,15 +106,15 @@ head(HallOfFame,2)
 
 # Your Turn - Creating new variables
 
-From https://bbwaa.com/22-hof/ : 394 ballots cast in 2022, 296 needed for induction 
+From https://bbwaa.com/23-hof/ : 389 ballots cast in 2023, 292 needed for induction 
 
 ```{r}
 bbwaa <- bbwaa %>% mutate(
-  yearID = 2022,
+  yearID = 2023,
   votedBy = "BBWAA",
-  ballots = 394,
-  needed = 296,
-  inducted = ifelse(Votes>=296, "Y", "N"),
+  ballots = 389,
+  needed = 292,
+  inducted = ifelse(Votes>=292, "Y", "N"),
   category = NA, # don't know yet
   needed_note = NA # not sure what would go here
 ) %>% rename(
@@ -155,10 +155,11 @@ bbwaa %>% anti_join(
   People %>% select(`First Lastname`, playerID), 
   by="First Lastname")
 
-People %>% filter(nameLast == "Pierzynski") %>%
+People %>% filter(nameLast %in% c("Dickey", "Hardy")) %>%
   select(playerID, nameFirst, nameLast)
 
 ```
+
 ---
 
 # Solving Problems
@@ -171,7 +172,7 @@ People <- People %>% mutate(
     str_replace(nameFirst,"\\. ", "."),  # this uses a regular expression
     nameLast)
 )
-People %>% filter(nameLast == "Pierzynski") %>%
+People %>% filter(nameLast %in% c("Dickey", "Hardy")) %>%
   select(playerID, `First Lastname`)
 
 bbwaa %>% anti_join(
