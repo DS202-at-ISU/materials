@@ -99,7 +99,9 @@ The `HallOfFame` dataset in the Lahman package has slightly different variables,
 
 ```{r}
 library(Lahman)
+
 head(HallOfFame,2)
+
 ```
 
 ---
@@ -228,7 +230,9 @@ If you prefer, you can also read the HTML code and create your own [CSS](https:/
 ```{r}
 url <- "http://www.baseball-reference.com/players/a/"
 html <- read_html(url)
-html %>% html_nodes("b") %>% html_text()
+html %>% html_elements("b") %>% html_text()
+
+# html %>% html_elements("#div_players_ p") %>% html_text()
 ```
 
 ---
@@ -242,7 +246,7 @@ We are, in fact, not just interested in the *names of the players*, but also in 
 - `html_attrs` extracts all attributes of an html node
 
 ```{r}
-html %>% html_nodes("b a") %>% html_attr(name="href")
+html %>% html_elements("b a") %>% html_attr(name="href")
 ```
 
 ---
@@ -264,11 +268,15 @@ What other information do we need to know? - and how can we get to that?
 ```{r}
 url <- "https://www.baseball-reference.com/players/a/abadfe01.shtml"
 html <- read_html(url)
-html %>% html_nodes(".stats_pullout") %>% html_text()
-html %>% html_nodes(".stats_pullout .poptip") %>% html_text()
-html %>% html_nodes(".p3 p , .p2 p, .p1 p, .stats_pullout strong") %>% html_text()
 
-html %>% html_nodes(".p1") %>% html_text()
+table_col_names <- html %>% html_elements("span strong") %>% html_text()
+stats <- html %>% html_elements(".stats_pullout p") %>% html_text()
+
+stats <- matrix(stats, nrow = 2)
+stats <- as.data.frame(stats)
+colnames(stats) <- table_col_names
+
+stats
 ```
 ---
 
@@ -276,9 +284,9 @@ html %>% html_nodes(".p1") %>% html_text()
 
 It's sometimes easier (for data munging after extracting) to extract multiple pieces rather than everything in one go. 
 ```{r}
-(stats <- html %>% html_nodes("span strong") %>% html_text())
-(season <- html %>% html_nodes(".stats_pullout p:nth-child(2)") %>% html_text())
-(career <- html %>% html_nodes(".stats_pullout p:nth-child(3)") %>% html_text())
+(stats <- html %>% html_elements("span strong") %>% html_text())
+(season <- html %>% html_elements(".stats_pullout p:nth-child(2)") %>% html_text())
+(career <- html %>% html_elements(".stats_pullout p:nth-child(3)") %>% html_text())
 ```
 
 
