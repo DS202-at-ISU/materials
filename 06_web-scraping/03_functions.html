@@ -3,8 +3,8 @@
   <head>
     <title>Functions in R</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Heike Hofmann" />
-    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <meta name="author" content="Will Ju" />
+    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 # Functions in R
 ]
 .author[
-### Heike Hofmann
+### Will Ju
 ]
 
 ---
@@ -152,20 +152,20 @@ bbwaa_scraper("https://www.baseball-reference.com/awards/hof_2021.shtml")
 ##    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
 ##  1 Rk    Name        YoB   Votes %vote HOFm  HOFs  Yrs   WAR   WAR7  JAWS  Jpos 
 ##  2 1     Curt Schil… 9th   285   71.1% 171   46    20    79.5  48.6  64.0  61.4 
-##  3 2     Barry Bonds 9th   248   61.8% 340   77    22    162.8 72.7  117.8 53.4 
+##  3 2     Barry Bonds 9th   248   61.8% 340   77    22    162.8 72.7  117.7 53.4 
 ##  4 3     Roger Clem… 9th   247   61.6% 332   73    24    139.2 65.9  102.6 61.4 
-##  5 4     Scott Rolen 4th   212   52.9% 99    40    17    70.1  43.6  56.9  55.7 
+##  5 4     Scott Role… 4th   212   52.9% 99    40    17    70.1  43.6  56.9  55.8 
 ##  6 5     Omar Vizqu… 4th   197   49.1% 120   42    24    45.6  26.8  36.2  55.4 
 ##  7 6     Billy Wagn… 6th   186   46.4% 107   24    16    27.7  19.8  23.7  32.5 
-##  8 7     Todd Helton 3rd   180   44.9% 175   59    17    61.8  46.6  54.2  53.8 
+##  8 7     Todd Helton 3rd   180   44.9% 175   59    17    61.8  46.6  54.2  53.4 
 ##  9 8     Gary Sheff… 7th   163   40.6% 158   61    22    60.5  38.0  49.3  56.7 
 ## 10 9     Andruw Jon… 4th   136   33.9% 109   34    17    62.7  46.4  54.6  58.1 
-## # … with 16 more rows, and 27 more variables: `Batting Stats` &lt;chr&gt;,
+## # ℹ 16 more rows
+## # ℹ 27 more variables: `Batting Stats` &lt;chr&gt;, `Batting Stats` &lt;chr&gt;,
 ## #   `Batting Stats` &lt;chr&gt;, `Batting Stats` &lt;chr&gt;, `Batting Stats` &lt;chr&gt;,
 ## #   `Batting Stats` &lt;chr&gt;, `Batting Stats` &lt;chr&gt;, `Batting Stats` &lt;chr&gt;,
 ## #   `Batting Stats` &lt;chr&gt;, `Batting Stats` &lt;chr&gt;, `Batting Stats` &lt;chr&gt;,
-## #   `Batting Stats` &lt;chr&gt;, `Batting Stats` &lt;chr&gt;, `Batting Stats` &lt;chr&gt;,
-## #   `Pitching Stats` &lt;chr&gt;, `Pitching Stats` &lt;chr&gt;, `Pitching Stats` &lt;chr&gt;,
+## #   `Batting Stats` &lt;chr&gt;, `Batting Stats` &lt;chr&gt;, `Pitching Stats` &lt;chr&gt;,
 ## #   `Pitching Stats` &lt;chr&gt;, `Pitching Stats` &lt;chr&gt;, `Pitching Stats` &lt;chr&gt;, …
 ```
 
@@ -178,20 +178,19 @@ Expand your function by a parameter `element` that enables you to download diffe
 Set `element` to "#hof_Veterans" and try out your function for the year 2022.
 
 
----
-class: inverse
-# Your Turn: a helper function
+&lt;!-- --- --&gt;
+&lt;!-- class: inverse --&gt;
+&lt;!-- # Your Turn: a helper function --&gt;
 
-Write a helper function `dots_to_spaces` that takes as input a vector of characters (text), and returns as output the same vector in which all occurrences of '.' are replaced and all double spaces are reduced to one.
+&lt;!-- Write a helper function `dots_to_spaces` that takes as input a vector of characters (text), and returns as output the same vector in which all occurrences of '.' are replaced and all double spaces are reduced to one. --&gt;
 
+&lt;!-- ```{r, eval = FALSE} --&gt;
+&lt;!-- dots_to_spaces &lt;- function(x) { --&gt;
+&lt;!--   # body of the function --&gt;
 
-```r
-dots_to_spaces &lt;- function(x) {
-  # body of the function
-  
-  # return cleaned up vector x
-}
-```
+&lt;!--   # return cleaned up vector x --&gt;
+&lt;!-- } --&gt;
+&lt;!-- ``` --&gt;
 
 ---
 class: inverse, center, middle

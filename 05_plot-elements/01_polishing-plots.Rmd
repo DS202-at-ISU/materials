@@ -1,6 +1,6 @@
 ---
 title: "Polishing Plots"
-author: Heike Hofmann
+author: Will Ju
 output:
   xaringan::moon_reader:
     lib_dir: libs
