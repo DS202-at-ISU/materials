@@ -1,6 +1,6 @@
 ---
 title: "DS 202 - Syllabus discussion"
-author: "Heike Hofmann"
+author: "Will Ju"
 ratio: 16x10
 output:
   rmdshower::shower_presentation:
@@ -36,8 +36,6 @@ Welcome to<br>DS 202
 * R packages development
     + cmpsR
     + ggpaintr
-* industrial work experience
-    + Machine learning engineer/Data scientist intern at Adobe
 
 ## What is this course about?
 
@@ -172,9 +170,9 @@ Course website:
 
 ## Labs
 
-- during class time on every other Thursday (starting with Thursday, Sep 14th) 
+- during class time on every other Wednesday (starting with Wednesday, Feb 7th) 
 - you will be partnered (randomly) in groups of 3 to 4
-- lab assignments are designed to be finished during class time, but 'finishing touches' can be applied until the following Monday, 10pm. 
+- lab assignments are designed to be finished during class time, but 'finishing touches' can be applied until the following Monday, 11:59 pm. 
 - if you cannot attend the lab, please let me know beforehand. Nevertheless, you are expected to do the work!
 
 ## Homework
@@ -187,7 +185,7 @@ Course website:
 
 - in-class programming exam.
 - open book, open note, open internet (no direct help from anyone else).
-- tentatively scheduled for Oct 26.
+- tentatively scheduled for March 20.
 - sample exams will be posted as we get closer to the date.
 
 
@@ -203,7 +201,7 @@ Course website:
 
 ## Attendance
 
-I expect you to attend class in some way (f2f or via zoom): there will be a substantial amount of time devoted to 'hands-on' examples on the computers. Make use of that time!
+I expect you to attend class in some way (f2f or via WebEx): there will be a substantial amount of time devoted to 'hands-on' examples on the computers. Make use of that time!
 
 If you have to miss class, please 
 
@@ -256,9 +254,11 @@ Have a look at:
 
 ## Skills and tools  |  slack
 
-* [slack invite link](https://join.slack.com/t/ds202fall2023/shared_invite/zt-21fue3puf-XV~37aCQLJVx1E7Cp_GsLQ)
+* [slack invite link](https://join.slack.com/t/slack-swh2207/shared_invite/zt-2ap5ldzmd-g8UA8g~TgpoUpPPDrTvtVw)
 * "messaging app for business that connects people to the information they need"
 * fancy features
+* invitation link expires in 30 days
+* slack account registered with `iastate.edu` is required to join
 
 <img src="data/course_slack_qr.png" width=250>
 
@@ -267,25 +267,6 @@ Have a look at:
 * be replaced? 
 * do not fully trust it
 * use it wisely
-
-## What is this class about?
-
-- very data centric
-- I'd like to know what you are interested in
-
-## 
-
-- **Sports** e.g. Baseball salaries and performance
-- **Crime data** (incl. type, time, place, demographics etc.)
-- **Health** e.g. fitness statistics, or disease rates, or health care costs
-- **Movies** e.g. ratings/box office revenues from IMDB
-Climate/Weather Data
-- **Travel data**, e.g. US flights
-- **Environmental Data**: Pollution, Fuel Economy, CO2 Emissions (Carbon Footprint)
-- **Global Data**:  World Economy, Social indicators, ...
-
-
-Anything else you can think of?
 
 
 ## What is exploratory data analysis?
@@ -325,6 +306,6 @@ Statistician Hans Rosling (1948 - 2017) presented [GapMinder at TED 2006](https:
 
 * (optional) watch the GapMinder TED talk
 * sign up for slack using your iastate.edu email if you haven't
-* sign up for github using your iastate.edu email if you haven't 
+* sign up for github if you haven't 
 
 <!-- https://join.slack.com/t/ds202fall2023/shared_invite/zt-21fue3puf-XV~37aCQLJVx1E7Cp_GsLQ -->
