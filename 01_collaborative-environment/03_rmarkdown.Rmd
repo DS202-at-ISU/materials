@@ -1,6 +1,6 @@
 ---
 title: "DS 202 -  RMarkdown"
-author: "Will Ju"
+author: ""
 output:
   xaringan::moon_reader:
     lib_dir: libs

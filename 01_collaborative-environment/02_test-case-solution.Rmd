@@ -1,6 +1,6 @@
 ---
 title: "DS 202 - Working in teams: Sample solution for the test case"
-author: "Will Ju"
+author: ""
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -267,7 +267,7 @@ Why are there more missing values in `HTIN4`? - The official BRFSS data is missi
 - disseminate your work by sharing the RMarkdown file
 
 
---- 
+---
 
 ## Struggles can be informative
 
@@ -276,9 +276,3 @@ Why are there more missing values in `HTIN4`? - The official BRFSS data is missi
 - ... others will too. 
 
 - remember those struggles when you write instructions for others to use your work
-
----
-
-## Checklist of reproducibility
-
-- 

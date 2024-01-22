@@ -1,7 +1,7 @@
 ---
 title: "R Basics"
-author: "Will Ju"
-date: "`r Sys.Date()`"
+author: ""
+date: ""
 output: 
   xaringan::moon_reader:
     lib_dir: libs
