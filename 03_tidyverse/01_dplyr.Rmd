@@ -48,26 +48,6 @@ output:
 
 ---
 
-# `dplyr` 
-
-There are a couple of primary `dplyr` *verbs*, representing distinct data analysis tasks:
-
-- `filter`: Select specified rows of a data frame, produce subsets
-
-- `mutate`: Add new or change existing columns of the data frame (as functions of existing columns)
-
-- `arrange`: Reorder the rows of a data frame
-
-- `select`: Select particular columns of a data frame
-
-- `summarize`: Create collapsed summaries of a data frame
-
-- `group_by`: Introduce structure to a data frame
-
-<br><br>
-RStudio cheat sheet for [dplyr](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)
----
-
 # Common structure
 
 1. all functions of the tidyverse have `data` as their first element
@@ -90,39 +70,6 @@ filter(data = fbi, year >= 2017, state == "Iowa")
 <br>
 Important: do not use `$` notation for variables within these functions, e.g: 
 
-
----
-
-# `filter`
-
-.pull-left[
-select a subset of the observations (horizontal selection):
-
-`filter (.data, ...)` 
-
-specify constraints (as logical expression) to data in `...` 
-
-all constraints are combined by logical and `&`
-]
-
-.pull-right[
-![](images/filter.png)
-]
-
-.footnote[Make sure to always call `library(dplyr)` before using `filter`]
-
----
-
-# `filter` Example
-
-From the `fbi` data, extract all burglaries in 2016:
-
-```{r, message=FALSE}
-library(classdata)
-library(dplyr)
-
-fbi %>% filter(type=="burglary", year==2016) %>% head()
-```
 ---
 
 ## The pipe operator `%>%`
@@ -160,6 +107,61 @@ fbi %>%
   ggplot(aes(x = year, y = count)) + 
     geom_point()
 ```
+
+---
+
+# `dplyr` 
+
+There are a couple of primary `dplyr` *verbs*, representing distinct data analysis tasks:
+
+- `filter`: Select specified rows of a data frame, produce subsets
+
+- `mutate`: Add new or change existing columns of the data frame (as functions of existing columns)
+
+- `arrange`: Reorder the rows of a data frame
+
+- `select`: Select particular columns of a data frame
+
+- `summarize`: Create collapsed summaries of a data frame
+
+- `group_by`: Introduce structure to a data frame
+
+<br><br>
+RStudio cheat sheet for [dplyr](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)
+
+---
+
+# `filter`
+
+.pull-left[
+select a subset of the observations (horizontal selection):
+
+`filter (.data, ...)` 
+
+specify constraints (as logical expression) to data in `...` 
+
+all constraints are combined by logical and `&`
+]
+
+.pull-right[
+![](images/filter.png)
+]
+
+.footnote[Make sure to always call `library(dplyr)` before using `filter`]
+
+---
+
+# `filter` Example
+
+From the `fbi` data, extract all burglaries in 2016:
+
+```{r, message=FALSE}
+library(classdata)
+library(dplyr)
+
+fbi %>% filter(type=="burglary", year==2016) %>% head()
+```
+
 
 ---
 

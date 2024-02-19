@@ -4,7 +4,7 @@
     <title>Intro to the tidyverse</title>
     <meta charset="utf-8" />
     <meta name="author" content="Will Ju" />
-    <script src="libs/header-attrs-2.24/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
@@ -60,26 +60,6 @@ class: center, middle, inverse, title-slide
 
 ---
 
-# `dplyr` 
-
-There are a couple of primary `dplyr` *verbs*, representing distinct data analysis tasks:
-
-- `filter`: Select specified rows of a data frame, produce subsets
-
-- `mutate`: Add new or change existing columns of the data frame (as functions of existing columns)
-
-- `arrange`: Reorder the rows of a data frame
-
-- `select`: Select particular columns of a data frame
-
-- `summarize`: Create collapsed summaries of a data frame
-
-- `group_by`: Introduce structure to a data frame
-
-&lt;br&gt;&lt;br&gt;
-RStudio cheat sheet for [dplyr](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)
----
-
 # Common structure
 
 1. all functions of the tidyverse have `data` as their first element
@@ -102,6 +82,64 @@ filter(data = fbi, year &gt;= 2017, state == "Iowa")
 &lt;br&gt;
 Important: do not use `$` notation for variables within these functions, e.g: 
 
+---
+
+## The pipe operator `%&gt;%`
+
+
+`f(x) %&gt;% g(y)` is equivalent to `g(f(x), y)`
+
+i.e. the output of one function is used as input to the next function. This function can be the identity
+
+Consequences:
+
+- `x %&gt;% f(y)` is the same as `f(x, y)`
+
+- statements of the form `k(h(g(f(x, y), z), u), v, w)` become
+`x %&gt;% f(y) %&gt;% g(z) %&gt;% h(u) %&gt;% k(v, w)`
+
+- read `%&gt;%` as "then do"
+
+---
+
+## Using the pipe `%&gt;%`
+
+```
+ggplot(data = filter(fbi, type=="homicide"), 
+aes(x = year, y = count)) + geom_point()
+```
+
+becomes
+
+```
+library(tidyverse)
+
+fbi %&gt;% 
+  filter(type=="homicide") %&gt;%
+  ggplot(aes(x = year, y = count)) + 
+    geom_point()
+```
+
+---
+
+# `dplyr` 
+
+There are a couple of primary `dplyr` *verbs*, representing distinct data analysis tasks:
+
+- `filter`: Select specified rows of a data frame, produce subsets
+
+- `mutate`: Add new or change existing columns of the data frame (as functions of existing columns)
+
+- `arrange`: Reorder the rows of a data frame
+
+- `select`: Select particular columns of a data frame
+
+- `summarize`: Create collapsed summaries of a data frame
+
+- `group_by`: Introduce structure to a data frame
+
+&lt;br&gt;&lt;br&gt;
+RStudio cheat sheet for [dplyr](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)
 
 ---
 
@@ -148,43 +186,7 @@ fbi %&gt;% filter(type=="burglary", year==2016) %&gt;% head()
 ## 5 California        6 CA          2016   39296476 burglary 188304 FALSE        
 ## 6 Colorado          7 CO          2016    5530105 burglary  23825 FALSE
 ```
----
 
-## The pipe operator `%&gt;%`
-
-
-`f(x) %&gt;% g(y)` is equivalent to `g(f(x), y)`
-
-i.e. the output of one function is used as input to the next function. This function can be the identity
-
-Consequences:
-
-- `x %&gt;% f(y)` is the same as `f(x, y)`
-
-- statements of the form `k(h(g(f(x, y), z), u), v, w)` become
-`x %&gt;% f(y) %&gt;% g(z) %&gt;% h(u) %&gt;% k(v, w)`
-
-- read `%&gt;%` as "then do"
-
----
-
-## Using the pipe `%&gt;%`
-
-```
-ggplot(data = filter(fbi, type=="homicide"), 
-aes(x = year, y = count)) + geom_point()
-```
-
-becomes
-
-```
-library(tidyverse)
-
-fbi %&gt;% 
-  filter(type=="homicide") %&gt;%
-  ggplot(aes(x = year, y = count)) + 
-    geom_point()
-```
 
 ---
 
