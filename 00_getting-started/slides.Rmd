@@ -27,15 +27,11 @@ Welcome to<br>DS 202
 * Skills and tools
 * An example
 
-## Who is Will Ju
+## Hello!
 
 * Wangqian (Will) Ju
-    + not a professor for sure
-    + not a doctor yet
-* 5th-year PhD student advised by Dr. Heike Hofmann
-* R packages development
-    + cmpsR
-    + ggpaintr
+    + Office hour: M/W 1:30 - 2:30 PM
+    + Location: TBD
 
 ## What is this course about?
 
@@ -170,7 +166,7 @@ Course website:
 
 ## Labs
 
-- during class time on every other Wednesday (starting with Wednesday, Feb 7th) 
+- during class time on every other Wednesday (starting with Wednesday, Sep 18th) 
 - you will be partnered (randomly) in groups of 3 to 4
 - lab assignments are designed to be finished during class time, but 'finishing touches' can be applied until the following Monday, 11:59 pm. 
 - if you cannot attend the lab, please let me know beforehand. Nevertheless, you are expected to do the work!
@@ -184,8 +180,9 @@ Course website:
 ## Midterm
 
 - in-class programming exam.
-- open book, open note, open internet (no direct help from anyone else).
-- tentatively scheduled for March 20.
+- open book, open note, open internet 
+- no direct help from anyone else
+- tentatively scheduled for Oct 30.
 - sample exams will be posted as we get closer to the date.
 
 
@@ -254,13 +251,11 @@ Have a look at:
 
 ## Skills and tools  |  slack
 
-* [slack invite link](https://join.slack.com/t/slack-swh2207/shared_invite/zt-2ap5ldzmd-g8UA8g~TgpoUpPPDrTvtVw)
+* [slack invite link](https://join.slack.com/t/slack-ltf7707/shared_invite/zt-2pd6ik35g-M4eauz4adUKFU5llfLmmaw)
 * "messaging app for business that connects people to the information they need"
 * fancy features
 * invitation link expires in 30 days
 * slack account registered with `iastate.edu` is required to join
-
-<img src="data/course_slack_qr.png" width=250>
 
 ## Skills and tools  |  Large Language Models
 
