@@ -37,7 +37,7 @@ bool_vec <- c(TRUE, FALSE, TRUE)
 ```{r}
 will <- list(
   name = 'Will',
-  age = 27,
+  age = 28,
   lives_in_Ames = TRUE
 )
 
