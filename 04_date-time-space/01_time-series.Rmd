@@ -1,6 +1,6 @@
 ---
 title: "Visualizing time"
-author: "Heike Hofmann"
+author: "DS 2020"
 output:
   xaringan::moon_reader:
     lib_dir: libs
