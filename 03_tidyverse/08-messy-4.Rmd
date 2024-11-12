@@ -1,6 +1,6 @@
 ---
 title: "Pulling data from different sources"
-author: "Will Ju"
+author: "DS 2020"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -174,22 +174,22 @@ anti_join(df2, df1, by="id") # no values for id in df1
 ```
 
 
----
-class: inverse
-# Your turn  - Homework #7
+<!-- --- -->
+<!-- class: inverse -->
+<!-- # Your turn  - Homework #7 -->
 
-For this example, use the data from the `classdata` package
+<!-- For this example, use the data from the `classdata` package -->
 
-- Load the `classdata` package into your R session.
+<!-- - Load the `classdata` package into your R session. -->
 
-- Investigate data sets `box` and `budget`.
+<!-- - Investigate data sets `box` and `budget`. -->
 
-- Join the two datasets to incorporate the release date of movies into the box office gross.
+<!-- - Join the two datasets to incorporate the release date of movies into the box office gross. -->
 
-- Check on the dimensions of the data sets before and after the join. Where are potential problems?
+<!-- - Check on the dimensions of the data sets before and after the join. Where are potential problems? -->
 
-- Use `anti_join` to detect problematic cases. 
+<!-- - Use `anti_join` to detect problematic cases.  -->
 
-- Use `box` to show cumulative box office revenue over time. Extra point: label very successful movies in a readable manner.
-- Identify box office hits and flops and visualize them.
+<!-- - Use `box` to show cumulative box office revenue over time. Extra point: label very successful movies in a readable manner. -->
+<!-- - Identify box office hits and flops and visualize them. -->
 
