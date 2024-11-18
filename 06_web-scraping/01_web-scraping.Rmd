@@ -1,6 +1,6 @@
 ---
-title: "DS 202 - Web Scraping"
-author: "Will Ju"
+title: "Web Scraping"
+author: "DS 2020"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -50,7 +50,7 @@ html
   
 ```{r}
 tables <- html %>% html_table(fill=TRUE)
-tables %>% str()
+# tables %>% str()
 ```
 
 ---
@@ -91,6 +91,8 @@ bbwaa <- hof_tbl[[1]]
 names(bbwaa)[1] <- "First Lastname"
 head(bbwaa)
 ```
+
+
 ---
 
 # Your Turn
@@ -101,8 +103,8 @@ The `HallOfFame` dataset in the Lahman package has slightly different variables,
 library(Lahman)
 
 head(HallOfFame,2)
-
 ```
+
 
 ---
 
@@ -272,7 +274,7 @@ html <- read_html(url)
 table_col_names <- html %>% html_elements("span strong") %>% html_text()
 stats <- html %>% html_elements(".stats_pullout p") %>% html_text()
 
-stats <- matrix(stats, nrow = 2)
+stats <- matrix(stats, nrow = 1)
 stats <- as.data.frame(stats)
 colnames(stats) <- table_col_names
 
@@ -286,7 +288,7 @@ It's sometimes easier (for data munging after extracting) to extract multiple pi
 ```{r}
 (stats <- html %>% html_elements("span strong") %>% html_text())
 (season <- html %>% html_elements(".stats_pullout p:nth-child(2)") %>% html_text())
-(career <- html %>% html_elements(".stats_pullout p:nth-child(3)") %>% html_text())
+# (career <- html %>% html_elements(".stats_pullout p:nth-child(3)") %>% html_text())
 ```
 
 
