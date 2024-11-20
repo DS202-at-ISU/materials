@@ -1,5 +1,5 @@
 ---
-title: "Functions in R"
+title: "Functions in R and your first scraper"
 author: "Will Ju"
 output:
   xaringan::moon_reader:
@@ -10,13 +10,60 @@ output:
       countIncrementalSlides: false
 ---
 class: middle, inverse, center
-# Function writing
+# Scraping with CSS
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(lubridate)
 ```
+
+
+---
+
+# Scrape the data
+
+Use the `rvest` package to download and parse data tables for Hall of Fame voting records. 
+
+```{r message=FALSE}
+url <- "https://www.baseball-reference.com/awards/hof_2022.shtml"
+
+library(rvest)
+site <- read_html(url)
+```
+
+The command `html_element` allows us to select based on css selectors (www3 school CSS)[https://www.w3schools.com/CSSref/css_selectors.php] or (CSS Diner)[https://flukeout.github.io/]
+
+Load the baseball reference website in Chrome. Then use View > Developer > Inspect Elements.
+
+What id should we use?
+
+---
+
+# BBWAA Table
+
+table has id `hof_BBWAA`:
+
+```{r}
+site %>% html_element(css="#hof_BBWAA") %>% html_table() %>% head(3)
+```
+
+Solve the problem with the first row by writing the table into a temporary file and reading it back in.
+
+---
+
+# Write the table, read the table
+
+```{r}
+bbwaa <- site %>% html_element(css="#hof_BBWAA") %>% html_table() 
+readr::write_csv(bbwaa, "temp.csv")
+bbwaa <- readr::read_csv("temp.csv", skip = 1, show_col_types = FALSE)
+head(bbwaa)
+```
+
+---
+class: middle, inverse, center
+# Functions in R
 
 ---
 
@@ -86,8 +133,6 @@ The package `rvest` allows us to download data from the baseball reference websi
 library(rvest)
 site <- read_html(url)
 bbwaa <- site %>% html_element("#hof_BBWAA") %>% html_table()
-
-head(bbwaa)
 ```
 
 Write a function that uses the url as input argument, scrapes the data and returns it

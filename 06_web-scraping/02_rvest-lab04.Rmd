@@ -34,6 +34,7 @@ The site baseball-reference.com has grown out of Sean Lahman's work and is now m
 https://www.baseball-reference.com/awards/hof_2022.shtml
 
 ---
+
 # Scrape the data
 
 Use the `rvest` package to download and parse data tables for Hall of Fame voting records. 
