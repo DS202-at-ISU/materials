@@ -166,7 +166,7 @@ Course website:
 
 ## Labs
 
-- during class time on every other Wednesday (starting with Wednesday, Sep 18th) 
+- during class time on every other Wednesday (starting with Wednesday, Feb 12th) 
 - you will be partnered (randomly) in groups of 3 to 4
 - lab assignments are designed to be finished during class time, but 'finishing touches' can be applied until the following Monday, 11:59 pm. 
 - if you cannot attend the lab, please let me know beforehand. Nevertheless, you are expected to do the work!
@@ -198,7 +198,7 @@ Course website:
 
 ## Attendance
 
-I expect you to attend class in some way (f2f or via WebEx): there will be a substantial amount of time devoted to 'hands-on' examples on the computers. Make use of that time!
+there will be a substantial amount of time devoted to 'hands-on' examples on the computers. Make use of that time!
 
 If you have to miss class, please 
 
@@ -214,7 +214,6 @@ If you have to miss class, please
     + apply what you learned to see if it works (expected vs unexpected)
     + seek the right help from the right person
 * Github
-* slack
 * Large Language models (LLMs)
     + chatGPT
     + ...
@@ -249,13 +248,13 @@ Have a look at:
 * write email to the instructor with your question
 * ...
 
-## Skills and tools  |  slack
+<!-- ## Skills and tools  |  slack -->
 
-* [slack invite link](https://join.slack.com/t/slack-ltf7707/shared_invite/zt-2pd6ik35g-M4eauz4adUKFU5llfLmmaw)
-* "messaging app for business that connects people to the information they need"
-* fancy features
-* invitation link expires in 30 days
-* slack account registered with `iastate.edu` is required to join
+<!-- * [slack invite link](https://join.slack.com/t/slack-ltf7707/shared_invite/zt-2pd6ik35g-M4eauz4adUKFU5llfLmmaw) -->
+<!-- * "messaging app for business that connects people to the information they need" -->
+<!-- * fancy features -->
+<!-- * invitation link expires in 30 days -->
+<!-- * slack account registered with `iastate.edu` is required to join -->
 
 ## Skills and tools  |  Large Language Models
 
