@@ -1,0 +1,335 @@
+---
+title: "R Basics"
+author: "Will Ju"
+date: ""
+output: 
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+# Outline
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+- R is a calculator
+
+- vectors and indices
+
+- data as a data.frame object
+
+- extracting pieces
+
+- five commands to look at objects
+
+---
+
+## R is a calculator
+
+- Basic algebra is the same as calculator/mathematics
+
+- explicit operators: `2*x` not `2x`,  `2^p` instead of `2p`
+
+- Applying a function is similar to other programming language
+
+- Making a variable, use `<-` (using `=` is NOT encouraged)
+
+- Everything in R is a vector
+
+---
+
+## Examples
+
+
+| Math   | Type          | Code           | 
+|:--- |:-------------:|-------------:|
+|  $$x = \frac{2}{3}$$ | Assignments      | `x <- 2/3` |
+| $$\sqrt{x}$$ | Functions  | `sqrt(x)` |
+| $$y = \left( \begin{array}{c} 1\\4\\5\\2\end{array}\right)$$ | Vectors  | `y <- c(1, 4, 5, 2) ` |
+| $$y_2$$ | Indices | `y[2]`| 
+
+---
+
+## More Examples
+
+| Math   | Type          | Code           | 
+|:--- |:-------------:|-------------:|
+| $$\sum_{i=1}^{4} y_i$$ | Mathematical Operators | `sum(y)` |
+| $$2y$$ |  | `2*y` |
+
+---
+class: inverse
+
+## Your Turn (5 min) 
+
+
+- Introduce vector $x$ defined as $$x = \left( \begin{array}{c} 4\\1\\3\\9\end{array}\right)$$
+
+- Introduce vector $y$ defined as  $$y = \left( \begin{array}{c} 1\\2\\3\\5\end{array}\right)$$
+
+
+- Calculate the Euclidean distance between the two vectors $x$ and $y$, defined as 
+
+$$d = \sqrt{\sum_{i=1}^4 (x_i - y_i)^2}$$
+
+---
+
+## Vectors and Indices
+
+Vectors are the most basic building structures of `R`
+
++ there are different types of vectors
+
+```{r}
+num_vec <- c(1, 2, 3)
+
+char_vec <- c('apple', 'banana', 'cherry')
+
+bool_vec <- c(TRUE, FALSE, TRUE)
+```
+
++ In `R`, indices start at 1 instead of 0
+
+---
+
+## data as a data.frame object
+
+What is a typical dataset look like?
+
+```{r}
+head(mtcars)
+```
+
+- each row represents one observation
+- each column represents one variable (feature)
+
+---
+
+## data as a data.frame object
+
+How to create a dataset?
+
+- values of a variable is stored in a vector
+- vectors are collected by a `data.frame()`
+
+```{r}
+mydata <- data.frame(
+  num_vec,
+  char_vec,
+  bool_vec
+)
+mydata
+```
+
+---
+
+## Getting help within R
+
+If you want to know what a specific `command` is doing:
+
+```{r, eval=FALSE}
+?command
+
+help("command") 
+
+help.search("command")
+
+??command
+```
+
+
+---
+
+## Loading class data
+
+- Some R packages have in-built datasets
+
+- For this class, there is an R package available on github 
+
+- we will use a function `install_github` from `remotes` package. So if you haven't installed `remotes` package, please do so first
+
+```{r eval=FALSE}
+install.packages("remotes")
+```
+
+- Installing/Updating `classdata` package (once every so often):
+```{r eval=FALSE}
+remotes::install_github("heike/classdata")
+```
+
+- Make the data available (every time you start R):
+```{r}
+library(classdata)
+```
+
+
+---
+class: inverse
+## Your Turn (5 min) 
+
+
+- Install the package `classdata` on your machine <br>
+
+- Make the package active in your current R session:
+```{r, eval=FALSE}
+library(classdata)
+```
+
+- Check the R help on the dataset `fbi`<br>
+
+- What happens if you just type in the name of the dataset?
+
+
+---
+
+## Extracting parts of objects
+
+- use indices
+
+```
+x[row_index, col_index]
+x[1:5, 2:3]
+x[c(1,5,6), c(3,4,5)]
+```
+
+- For a 2D object (a typical datasets) with column (variable) names
+
+```
+x$variable
+x[, var_names]
+x[, c("State", "Year")]
+```
+
+<font color="darkblue">Try these commands out for yourself on the `fbi` data.</font>
+
+---
+
+## five commands to look at objects
+
+for object `x`, we can try out the following commands:
+
+- `x`
+
+- `head(x)`
+
+- `summary(x)`
+
+- `str(x)`
+
+- `dim(x)`
+
+<br><br><br>
+
+<font color="darkblue">Try these commands out for yourself on the `fbi` data.</font>
+
+---
+
+## `str` stands for *structure*
+
+- `str` shows us the **str**ucture of an object
+
+- fbi is a data frame with columns (variables) and rows (records)
+
+```{r}
+str(fbi)
+```
+
+---
+
+## Statistical summaries
+
+Elements of the five point summary: <br>
+`mean, median, min, max, quartiles`
+
+Other summary statistics:<br>
+`range, sd, var`
+
+Summaries of two variables:<br>
+`cor, cov`
+
+---
+class: inverse
+## Your turn 
+
+- Look at the first 10 data records of the `fbi` data
+
+- Compute mean and standard deviation for the number of counts. Why do you get NAs? (read `?NA`)
+
+- Advanced:  Read `?mean` and `?sd`, and fix missing value problem
+
+---
+
+## More about R
+
+- lists
+
+- control structures
+
+- user-defined functions
+
+---
+
+## lists
+
+`list` is also a fundamental building structure of `R`. Vector stores values of the same type, but `list` can store values of different types.
+
+```{r}
+will <- list(
+  name = 'Will',
+  age = 28,
+  lives_in_Ames = TRUE
+)
+
+will
+```
+
+---
+
+# control structures
+
++ if statements
++ for statements
++ while statements
++ repeat statements
++ break and next statements
++ switch statements
+
+
+---
+
+# control structures
+
++ if statements
+
+```{r}
+if (will$lives_in_Ames) {
+  print("Ames is good")
+}
+```
+
++ for statements
+
+```{r}
+for (num in num_vec) {
+  print(num)
+}
+```
+
+---
+
+# user-defined functions
+
+```{r}
+plus_a_b <- function(arg1, arg2) {
+  arg1 + arg2
+}
+
+plus_a_b(3, 10)
+```
+
+
