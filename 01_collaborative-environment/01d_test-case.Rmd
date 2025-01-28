@@ -1,5 +1,5 @@
 ---
-title: "DS 202 - Working in teams"
+title: "DS 2020 - Working in teams"
 author: ""
 output:
   xaringan::moon_reader:
@@ -15,8 +15,6 @@ class: center, middle
 options(htmltools.dir.version = FALSE)
 ```
 
-# Tools for collaborating in teams
-
 ---
 
 ## A test case
@@ -29,6 +27,20 @@ It is conducted annually by the Center for Disease Control and Prevention (CDC).
 
 Codebook with detailed explanations of variables is [https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf](https://www.cdc.gov/brfss/annual_data/2015/pdf/codebook15_llcp.pdf).
 
+---
+class: inverse
+## Your turn
+
+For this "Your turn", a data set is provided, and you are asked to answer several questions based on the dataset. 
+
+- Imagine that you are in a collaborative environment, and you want to make sure that your colleague can reproduce your work.
+
+- It's OKAY if you can NOT figure some of the questions out. Just try your best and document what you did. Remember: your "colleague" will read your code and what you write.
+
+The goal of this exercise is to
+
+- make you think about how to make your work reproducible
+- give you a taste of doing data analysis with `R`
 
 ---
 class: inverse
