@@ -1,5 +1,5 @@
 ---
-title: "DS 202 -  git and github"
+title: "DS 2020 -  git and github"
 author: ""
 output:
   xaringan::moon_reader:

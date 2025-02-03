@@ -1,5 +1,5 @@
 ---
-title: "DS 202 -  RMarkdown"
+title: "DS 2020 -  RMarkdown"
 author: ""
 output:
   xaringan::moon_reader:
@@ -77,7 +77,7 @@ class: inverse
 ## Your Turn (10 min) 
 
 
-1. Open RStudio, create a new project - how about `ds202`?.
+1. Open RStudio, create a new project - how about `ds2020`?
 
 2. Create a new RMarkdown file (File > New File > R Markdown ...) and knit it.
 
