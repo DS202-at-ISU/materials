@@ -85,7 +85,7 @@ downloads %>% group_by(year, month) %>% summarize( n = sum(count)) %>%
 
 <br>
 
-- http://ggplot2.org/book/ or Hadley's book *ggplot2: Elegant Graphics for Data Analysis* for reference 
+- https://ggplot2-book.org/ or Hadley's book *ggplot2: Elegant Graphics for Data Analysis* for reference 
 
 
 
