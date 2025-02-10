@@ -52,6 +52,45 @@ ggplot(aes(x = year, y = homicide), data=fbiwide) +
 
 ---
 
+## tiny example
+
+```{r, echo=TRUE, message=FALSE}
+library(dplyr)
+df1 <- data.frame(
+  x = seq(-1, 1, 0.1),
+  type = 'up'
+)
+df1$y <- df1$x
+
+df2 <- data.frame(
+  x = seq(-1, 1, 0.1),
+  type = 'down'
+)
+df2$y <- -df2$x
+
+df <- rbind(df1, df2)
+
+df <- df %>% mutate(
+  sign = if_else(y >= 0, 'positive', 'negative')
+)
+```
+
+---
+
+## tiny example
+
+```{r}
+ggplot(df, aes(x = x, y = y,
+               color = type)) +
+  geom_point() + 
+  facet_wrap(~type)
+```
+
+
+
+
+---
+
 ## Setup of `facet_wrap` and `facet_grid`
 
 - `facet_grid` has formula specification: `rows ~ cols`

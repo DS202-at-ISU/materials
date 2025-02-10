@@ -68,6 +68,49 @@ ggplot(aes(x = year, y = homicide), data=fbiwide) +
 
 ---
 
+## tiny example
+
+
+```r
+library(dplyr)
+df1 &lt;- data.frame(
+  x = seq(-1, 1, 0.1),
+  type = 'up'
+)
+df1$y &lt;- df1$x
+
+df2 &lt;- data.frame(
+  x = seq(-1, 1, 0.1),
+  type = 'down'
+)
+df2$y &lt;- -df2$x
+
+df &lt;- rbind(df1, df2)
+
+df &lt;- df %&gt;% mutate(
+  sign = if_else(y &gt;= 0, 'positive', 'negative')
+)
+```
+
+---
+
+## tiny example
+
+
+```r
+ggplot(df, aes(x = x, y = y,
+               color = type)) +
+  geom_point() + 
+  facet_wrap(~type)
+```
+
+![](03_r-graphics_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+
+
+
+---
+
 ## Setup of `facet_wrap` and `facet_grid`
 
 - `facet_grid` has formula specification: `rows ~ cols`
@@ -102,7 +145,7 @@ Use the `fbiwide` data from the package `classdata` for this your turn.
 
 ## Boxplots
 
-![](03_r-graphics_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+![](03_r-graphics_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -127,7 +170,7 @@ ggplot(data = fbi, aes(x = type, y = log10(count))) +
   coord_flip()
 ```
 
-![](03_r-graphics_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+![](03_r-graphics_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 
 
 
@@ -167,7 +210,7 @@ ggplot(fbiwide, aes(x = motor_vehicle_theft)) +
   ggtitle("binwidth = 5000")
 ```
 
-![](03_r-graphics_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+![](03_r-graphics_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -182,7 +225,7 @@ ggplot(fbiwide, aes(x = motor_vehicle_theft)) +
   ggtitle("binwidth = 1000")
 ```
 
-![](03_r-graphics_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+![](03_r-graphics_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
 
 Always change the bin width! There is no perfect bin width, but a lot of different views of the data at different resolutions!
 ---
@@ -196,7 +239,7 @@ ggplot(fbi, aes(x = type)) +
   coord_flip()
 ```
 
-![](03_r-graphics_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+![](03_r-graphics_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
 
 ---
 
