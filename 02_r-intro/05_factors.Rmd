@@ -1,5 +1,5 @@
 ---
-title: "DS 202: Factor variables"
+title: "DS 2020: Factor variables"
 author: Will Ju
 output:
   xaringan::moon_reader:
