@@ -43,6 +43,23 @@ Leo Tolstoy
 
 ---
 
+# Sources of Messiness
+
+1. Column headers are values, not variable names.<br>
+e.g. *treatmenta, treatmentb*
+
+2. Multiple variables are stored in one column.<br>
+e.g. *Fall 2015, Spring 2016* or *"1301 8th St SE, Orange City, Iowa 51041
+(42.99755, -96.04149)", "2102 Durant, Harlan, Iowa 51537
+(41.65672, -95.33780)"*
+
+3. Multiple observational units are stored in the same table.
+
+4. A single observational unit is stored in multiple tables.
+
+
+---
+
 # Data often is in a spreadsheet format, but ...
 
 there's different ways of encoding the same information:
@@ -57,23 +74,8 @@ Option #2
 read.csv("data/preg2.csv")
 ```
 
-Neither #1 nor #2 are "clean" versions of the data: observed information is part of the data structure; some implicit information is assumed
+Neither #1 nor #2 are "clean" versions of the data: not key-value pairs
 
----
-
-# Sources of Messiness
-
-1. Column headers are values, not variable names.<br>
-e.g. *treatmenta, treatmentb*
-
-2. Multiple variables are stored in one column.<br>
-e.g. *Fall 2015, Spring 2016* or *"1301 8th St SE, Orange City, Iowa 51041
-(42.99755, -96.04149)", "2102 Durant, Harlan, Iowa 51537
-(41.65672, -95.33780)"*
-
-3. Multiple observational units are stored in the same table.
-
-4. A single observational unit is stored in multiple tables.
 
 ---
 
@@ -156,7 +158,7 @@ french_fries %>% head()
 
 ---
 
-# Gather/Pivot to long
+# Pivot to long
 
 ```{r}
 ffm <- french_fries %>% 
@@ -168,7 +170,7 @@ ffm
 
 ---
 
-# Gather/Pivot to long
+# Pivot to long
 
 <img src="images/gather-spread.png" height = 400>
 
