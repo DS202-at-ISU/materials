@@ -112,7 +112,7 @@ no Messy 1? - problems of type Messy 1 are typically hard to detect and often up
 
 ---
 class: inverse
-# Your Turn (10 min)
+# Your Turn (5 min)
 
 
 - Check the help for the function `parse_number` in the `readr` package and use it on the store location. What result do you get?
@@ -124,7 +124,7 @@ class: inverse
 
 ---
 class: inverse
-# Your Turn - exploration (10 mins)
+# Your Turn - exploration (5 mins)
 
 Use `dplyr` functionality to answer the following questions:
 
