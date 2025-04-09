@@ -1,5 +1,5 @@
 ---
-title: "DS 202 Final Projects"
+title: "DS 2020 Final Projects"
 author: "Will Ju"
 output:
   xaringan::moon_reader:
@@ -22,10 +22,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Timeline
 
--   Mar 29: submit project proposal
--   Apr 12: submit first draft
--   Apr 29: final presentation
--   May 6 (Finals week): submit final report
+-   May 5: final presentation
+-   May 12 (Finals week): submit final report
 
 ---
 
