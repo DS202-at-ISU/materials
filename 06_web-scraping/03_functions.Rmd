@@ -26,7 +26,7 @@ library(lubridate)
 Use the `rvest` package to download and parse data tables for Hall of Fame voting records. 
 
 ```{r message=FALSE}
-url <- "https://www.baseball-reference.com/awards/hof_2022.shtml"
+url <- "https://www.baseball-reference.com/awards/hof_2025.shtml"
 
 library(rvest)
 site <- read_html(url)
@@ -48,16 +48,14 @@ table has id `hof_BBWAA`:
 site %>% html_element(css="#hof_BBWAA") %>% html_table() %>% head(3)
 ```
 
-Solve the problem with the first row by writing the table into a temporary file and reading it back in.
-
 ---
 
-# Write the table, read the table
+# Reset the column names from the first row
 
 ```{r}
 bbwaa <- site %>% html_element(css="#hof_BBWAA") %>% html_table() 
-readr::write_csv(bbwaa, "temp.csv")
-bbwaa <- readr::read_csv("temp.csv", skip = 1, show_col_types = FALSE)
+colnames(bbwaa) <- bbwaa[1,]
+bbwaa <- bbwaa[-1,]
 head(bbwaa)
 ```
 
@@ -138,7 +136,7 @@ bbwaa <- site %>% html_element("#hof_BBWAA") %>% html_table()
 Write a function that uses the url as input argument, scrapes the data and returns it
 
 Try out your function on the site
-https://www.baseball-reference.com/awards/hof_2021.shtml
+https://www.baseball-reference.com/awards/hof_2024.shtml
 
 ---
 
@@ -154,7 +152,7 @@ bbwaa_scraper <- function(url) {
   bbwaa
 }
 
-bbwaa_scraper("https://www.baseball-reference.com/awards/hof_2021.shtml")
+bbwaa_scraper("https://www.baseball-reference.com/awards/hof_2024.shtml")
 ```
 
 ---
@@ -163,7 +161,7 @@ class: inverse
 
 Expand your function by a parameter `element` that enables you to download different pieces from a website.
 
-Set `element` to "#hof_Veterans" and try out your function for the year 2022.
+Set `element` to "#hof_Veterans" and try out your function for the year 2025.
 
 
 <!-- --- -->
