@@ -1,0 +1,70 @@
+---
+title: "Summer 2025 DS2020: Syllabus"
+author: "Will Ju"
+date: ""
+output: 
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+# Overview
+
+- Instructor and TA Info
+- Topics Covered
+- Course Structure and Evaluation
+- Final Project
+
+---
+
+# Instructor and TA Info
+
+- Will Ju: `wju@iastate.edu`
+- Ben Moolman: `bmool24@iastate.edu`
+
+---
+
+# Topics Covered
+
+- `R`
+- Exploratory Data Analysis (EDA)
+- Data Manipulation
+  - Data Cleaning
+  - Data Transformation
+  - `filter`/`join`/`group_by`/`arrange`
+- Data Visualization
+  - `ggplot2`
+- Collaborative Environment and Tools
+  - `git` and `GitHub`
+- Making Reproducible Report
+  - `R Markdown`
+- Data Acquisition
+  - Web Scraping Techniques
+
+---
+
+# Course Structure and Evaluation
+
+- Course Website: [https://ds202-at-isu.github.io/](https://ds202-at-isu.github.io/)
+- Lecture Videos
+  - New videos will be posted on Mondays
+  - "Your Turn" - 10% 
+- Assignment - 50% 
+  - Homework Assignments
+  - "Lab" Assignments / Extension of Lecture
+- NO Midterm
+- Final Project (40%)
+
+---
+
+# Final Project
+
+- [A good example from previous semester](https://github.com/BraedenCollings/Final-Project-DS202)
+- Group Project
+  - Max: 3 students
+- Final Presentation Video
+- Final Report
+
