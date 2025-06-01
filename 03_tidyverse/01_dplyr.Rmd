@@ -59,7 +59,7 @@ ggplot(data = fbi, aes(x = year, y = count)) +
 filter(data = fbi, year >= 2017, state == "Iowa")
 ```
 
-*i.e. work well with `%>%` operator*
+*i.e. work well with `|>` operator*
 
 2. *Most* functions return a data set. 
 
@@ -72,25 +72,25 @@ Important: do not use `$` notation for variables within these functions, e.g:
 
 ---
 
-## The pipe operator `%>%`
+## The pipe operator `|>`
 
 
-`f(x) %>% g(y)` is equivalent to `g(f(x), y)`
+`f(x) |> g(y)` is equivalent to `g(f(x), y)`
 
 i.e. the output of one function is used as input to the next function. This function can be the identity
 
 Consequences:
 
-- `x %>% f(y)` is the same as `f(x, y)`
+- `x |> f(y)` is the same as `f(x, y)`
 
 - statements of the form `k(h(g(f(x, y), z), u), v, w)` become
-`x %>% f(y) %>% g(z) %>% h(u) %>% k(v, w)`
+`x |> f(y) |> g(z) |> h(u) |> k(v, w)`
 
-- read `%>%` as "then do"
+- read `|>` as "then do"
 
 ---
 
-## Using the pipe `%>%`
+## Using the pipe `|>`
 
 ```
 ggplot(data = filter(fbi, type=="homicide"), 
@@ -102,8 +102,8 @@ becomes
 ```
 library(tidyverse)
 
-fbi %>% 
-  filter(type=="homicide") %>%
+fbi |> 
+  filter(type=="homicide") |>
   ggplot(aes(x = year, y = count)) + 
     geom_point()
 ```
@@ -159,7 +159,7 @@ From the `fbi` data, extract all burglaries in 2016:
 library(classdata)
 library(dplyr)
 
-fbi %>% filter(type=="burglary", year==2016) %>% head()
+fbi |> filter(type=="burglary", year==2016) |> head()
 ```
 
 
@@ -192,7 +192,7 @@ variables introduced become available in following changes
 Introduce a variable `Rate` into the `fbi` data:
 
 ```{r}
-fbi %>% mutate(rate = count/population*90000) %>% head()
+fbi |> mutate(rate = count/population*90000) |> head()
 ```
 
 
@@ -207,7 +207,7 @@ Successive variables break ties in previous ones
 `desc` stands for descending, otherwise rows are sorted from smallest to largest
 
 ```{r, message=FALSE}
-fbi %>% arrange(desc(year), type, desc(count)) %>% head()
+fbi |> arrange(desc(year), type, desc(count)) |> head()
 ```
 
 ---
@@ -241,8 +241,8 @@ Negative selection also works, e.g. `-1` (not the first variable)
 Select `type, count, state`, and `year` from the `fbi` data:
 
 ```{r}
-fbi %>% arrange(desc(year), type, desc(count)) %>%
-  select(type, count, state, year) %>% head()
+fbi |> arrange(desc(year), type, desc(count)) |>
+  select(type, count, state, year) |> head()
 ```
 
 ---
@@ -280,7 +280,7 @@ Creates a new dataset with 1 row and one column for each of the summary statisti
 Calculate the mean and standard deviation of Crime rates in the `fbi` data
 
 ```{r}
-fbi %>% 
+fbi |> 
     summarise(mean_rate = mean(count/population*90000, na.rm=TRUE), 
               sd_rate = sd(count/population*90000, na.rm = TRUE))
 ```
@@ -313,8 +313,8 @@ The new dataset has  one column for each of the summary statistics, and one row 
 For each type of crime, calculate average crime rate and standard deviation.
 
 ```{r}
-fbi %>%
-    group_by(type) %>%
+fbi |>
+    group_by(type) |>
     summarise(mean_rate = mean(count/population*90000, na.rm=TRUE), 
               sd_rate = sd(count/population*90000, na.rm = TRUE))
 ```

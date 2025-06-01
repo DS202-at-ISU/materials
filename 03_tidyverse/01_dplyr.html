@@ -71,7 +71,7 @@ ggplot(data = fbi, aes(x = year, y = count)) +
 filter(data = fbi, year &gt;= 2017, state == "Iowa")
 ```
 
-*i.e. work well with `%&gt;%` operator*
+*i.e. work well with `|&gt;` operator*
 
 2. *Most* functions return a data set. 
 
@@ -84,25 +84,25 @@ Important: do not use `$` notation for variables within these functions, e.g:
 
 ---
 
-## The pipe operator `%&gt;%`
+## The pipe operator `|&gt;`
 
 
-`f(x) %&gt;% g(y)` is equivalent to `g(f(x), y)`
+`f(x) |&gt; g(y)` is equivalent to `g(f(x), y)`
 
 i.e. the output of one function is used as input to the next function. This function can be the identity
 
 Consequences:
 
-- `x %&gt;% f(y)` is the same as `f(x, y)`
+- `x |&gt; f(y)` is the same as `f(x, y)`
 
 - statements of the form `k(h(g(f(x, y), z), u), v, w)` become
-`x %&gt;% f(y) %&gt;% g(z) %&gt;% h(u) %&gt;% k(v, w)`
+`x |&gt; f(y) |&gt; g(z) |&gt; h(u) |&gt; k(v, w)`
 
-- read `%&gt;%` as "then do"
+- read `|&gt;` as "then do"
 
 ---
 
-## Using the pipe `%&gt;%`
+## Using the pipe `|&gt;`
 
 ```
 ggplot(data = filter(fbi, type=="homicide"), 
@@ -114,8 +114,8 @@ becomes
 ```
 library(tidyverse)
 
-fbi %&gt;% 
-  filter(type=="homicide") %&gt;%
+fbi |&gt; 
+  filter(type=="homicide") |&gt;
   ggplot(aes(x = year, y = count)) + 
     geom_point()
 ```
@@ -172,7 +172,7 @@ From the `fbi` data, extract all burglaries in 2016:
 library(classdata)
 library(dplyr)
 
-fbi %&gt;% filter(type=="burglary", year==2016) %&gt;% head()
+fbi |&gt; filter(type=="burglary", year==2016) |&gt; head()
 ```
 
 ```
@@ -218,7 +218,7 @@ Introduce a variable `Rate` into the `fbi` data:
 
 
 ```r
-fbi %&gt;% mutate(rate = count/population*90000) %&gt;% head()
+fbi |&gt; mutate(rate = count/population*90000) |&gt; head()
 ```
 
 ```
@@ -246,7 +246,7 @@ Successive variables break ties in previous ones
 
 
 ```r
-fbi %&gt;% arrange(desc(year), type, desc(count)) %&gt;% head()
+fbi |&gt; arrange(desc(year), type, desc(count)) |&gt; head()
 ```
 
 ```
@@ -293,8 +293,8 @@ Select `type, count, state`, and `year` from the `fbi` data:
 
 
 ```r
-fbi %&gt;% arrange(desc(year), type, desc(count)) %&gt;%
-  select(type, count, state, year) %&gt;% head()
+fbi |&gt; arrange(desc(year), type, desc(count)) |&gt;
+  select(type, count, state, year) |&gt; head()
 ```
 
 ```
@@ -345,7 +345,7 @@ Calculate the mean and standard deviation of Crime rates in the `fbi` data
 
 
 ```r
-fbi %&gt;% 
+fbi |&gt; 
     summarise(mean_rate = mean(count/population*90000, na.rm=TRUE), 
               sd_rate = sd(count/population*90000, na.rm = TRUE))
 ```
@@ -386,8 +386,8 @@ For each type of crime, calculate average crime rate and standard deviation.
 
 
 ```r
-fbi %&gt;%
-    group_by(type) %&gt;%
+fbi |&gt;
+    group_by(type) |&gt;
     summarise(mean_rate = mean(count/population*90000, na.rm=TRUE), 
               sd_rate = sd(count/population*90000, na.rm = TRUE))
 ```
