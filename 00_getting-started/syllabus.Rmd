@@ -1,0 +1,160 @@
+---
+title: "Fall 2025 DS2020: Syllabus"
+author: "Will Ju"
+date: ""
+output: 
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+<style>
+/* Global text on every slide */
+.remark-slide-content {
+  font-size: 24px;   /* overall font size */
+  line-height: 1.2;  /* space between lines of text */
+  /* Optional: a slightly narrower text block can feel nicer on projectors */
+  max-width: 1100px;
+}
+
+/* Headings */
+.remark-slide-content h1 { font-size: 48px; line-height: 1.2; }
+.remark-slide-content h2 { font-size: 40px; line-height: 1.25; }
+.remark-slide-content h3 { font-size: 32px; line-height: 1.3; }
+
+/* Paragraph & bullet spacing (between items, not between lines) */
+.remark-slide-content p  { margin: 0.5em 0; }
+.remark-slide-content li { margin-bottom: 0.35em; }
+
+/* Code blocks & inline code */
+.remark-code, .remark-inline-code {
+  font-size: 85%;
+  line-height: 1.35;
+}
+
+/* Handy per-slide utility classes */
+.small { font-size: 85%; }   /* use when a slide is crowded */
+.tiny  { font-size: 70%; }
+.large { font-size: 115%; }  /* use when you want big text */
+.loose { line-height: 1.7; } /* extra airy line spacing */
+.tight { line-height: 1.2; } /* tighter line spacing */
+</style>
+
+# Overview
+
+- Instructor and TA Info
+- Topics Covered
+- Course Structure and Evaluation
+- Final Project
+
+---
+
+# Instructor and TA Info
+
+- Will Ju: `wju@iastate.edu`
+- Craig Orman: `cworman@iastate.edu`
+
+---
+
+# Topics Covered
+
+- `R`
+- Exploratory Data Analysis (EDA)
+- Data Manipulation
+  - Data Cleaning
+  - Data Transformation
+  - `filter`/`join`/`group_by`/`arrange`
+- Data Visualization
+  - `ggplot2`
+- Collaborative Environment and Tools
+  - `git` and `GitHub`
+- Making Reproducible Report
+  - `R Markdown`
+- Data Acquisition
+  - Web Scraping Techniques
+
+---
+
+# at the end of the course you will...
+
+- be able to acquire and read data in different formats and from different sources
+- know the basic programming principles of R
+- be able to implement a basic data pipeline
+- be able to do a data exploration
+- visualize data in appropriate forms
+- communicate your findings in a reproducible form as report and/or web-app
+
+---
+
+# Course Structure and Evaluation
+
+- Course Website: [https://ds202-at-isu.github.io/](https://ds202-at-isu.github.io/)
+- Canvas
+  - Announcements
+  - Assignments and grading
+
+---
+
+# Course Structure and Evaluation
+
+| Component | Weight |
+|:-- | --:|
+| Homework (5-6) | 20% |
+| Labs (3-4) | 25% |
+| Midterm (1) | 25% |
+| **Final Project** | |
+|   report | 22.5% |
+|   presentation | 7.5% |
+
+---
+
+# Labs
+
+- During class time on every other Wednesday (starting with Wednesday, Sep 17th)
+- You will be partnered (randomly) in groups of 3 to 4
+- Lab assignments are designed to be finished during class time, but ‘finishing touches’ can be applied until the following Monday, 11:59 pm.
+- If you cannot attend the lab, please let me know beforehand. Nevertheless, you are expected to do the work!
+
+---
+
+# Homework Assignments
+
+- In weeks without a lab, a homework is posted.
+- Homework assignments revise what we covered, plus synthesize some new information.
+- Plan to spend about 3-4h on each assignment.
+
+---
+
+# Midterm
+
+- In-class programming exam.
+- Open book, open note, open internet
+- No direct help from anyone else
+- Tentatively scheduled for Oct 29
+- Sample exams will be posted as we get closer to the date.
+
+---
+
+# Final Project
+
+- [A good example from previous semester](https://github.com/BraedenCollings/Final-Project-DS202)
+- Group Project
+  - Max: 4 students
+- Use real-world datasets
+- Final Presentation
+- Final Report
+
+---
+
+# Attendance
+
+There will be a substantial amount of time devoted to ‘hands-on’ examples on the computers. Make use of that time!
+
+If you have to miss class, please
+
+- Let me know ahead of time.
+- Make sure to catch up with the material (e.g. have a designated note taker, talk to one of your team members, … )
+

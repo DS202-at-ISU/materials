@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Dates and times</title>
+    <title>Fall 2025 DS2020: Syllabus</title>
     <meta charset="utf-8" />
     <meta name="author" content="Will Ju" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
@@ -13,7 +13,7 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# Dates and times
+# Fall 2025 DS2020: Syllabus
 ]
 .author[
 ### Will Ju
@@ -21,214 +21,153 @@ class: center, middle, inverse, title-slide
 
 ---
 
-class: middle, inverse, center
-# Working with date and time
 
+&lt;style&gt;
+/* Global text on every slide */
+.remark-slide-content {
+  font-size: 24px;   /* overall font size */
+  line-height: 1.2;  /* space between lines of text */
+  /* Optional: a slightly narrower text block can feel nicer on projectors */
+  max-width: 1100px;
+}
 
+/* Headings */
+.remark-slide-content h1 { font-size: 48px; line-height: 1.2; }
+.remark-slide-content h2 { font-size: 40px; line-height: 1.25; }
+.remark-slide-content h3 { font-size: 32px; line-height: 1.3; }
 
+/* Paragraph &amp; bullet spacing (between items, not between lines) */
+.remark-slide-content p  { margin: 0.5em 0; }
+.remark-slide-content li { margin-bottom: 0.35em; }
 
----
+/* Code blocks &amp; inline code */
+.remark-code, .remark-inline-code {
+  font-size: 85%;
+  line-height: 1.35;
+}
 
-# `lubridate` package
+/* Handy per-slide utility classes */
+.small { font-size: 85%; }   /* use when a slide is crowded */
+.tiny  { font-size: 70%; }
+.large { font-size: 115%; }  /* use when you want big text */
+.loose { line-height: 1.7; } /* extra airy line spacing */
+.tight { line-height: 1.2; } /* tighter line spacing */
+&lt;/style&gt;
 
-- package for working with dates and times
+# Overview
 
-- defines different classes of time: instants, periods, intervals, durations
-
-- defines converter and accessor functions, enables time calculus
-
----
-
-# Converter functions and instants in time
-
-- time instants: one (absolute) moment in time, e.g. `now()`
-
-- easy-to-use converter functions: 
-    - date: `ymd`, `mdy`, `dmy`, ...
-    - time: `hm`, `hms`, ...
-    - date &amp; time: `ymd_hms`, `mdy_hm`, ...
-
-- order of letters determines how strings are parsed
-
-- separators are automatically determined, then assumed to be the same
-
-Example:
-
-```r
-mdy("10-17-2022")
-```
-
-```
-## [1] "2022-10-17"
-```
-
----
-
-# Conversion functions
-
-[lubridate package cheat sheet](https://github.com/rstudio/cheatsheets/raw/main/lubridate.pdf)
-
-![](images/lubridate-conversion.png)
-
----
-class: inverse
-# Your Turn 
-
-- Create date objects for today's date by typing the date in text format and converting it with one of the `lubridate` converter functions. 
-
-- Try different formats of writing the date and compare the end results.
+- Instructor and TA Info
+- Topics Covered
+- Course Structure and Evaluation
+- Final Project
 
 ---
 
-# Example: Ames Liquor Sales
+# Instructor and TA Info
 
-
-```r
-# url &lt;- "https://github.com/ds202-at-ISU/materials/blob/master/03_tidyverse/data/ames-liquor.rds?raw=TRUE"
-# download.file(url, "data/ames-liquor.rds", mode="wb")
-ames &lt;- readRDS("data/ames-liquor.rds")
-
-summary(ames$Date) # pretty uninformative 
-```
-
-```
-##    Length     Class      Mode 
-##    661945 character character
-```
-
-```r
-ames$Date &lt;- lubridate::mdy(ames$Date)
-summary(ames$Date) # allows time algebra
-```
-
-```
-##         Min.      1st Qu.       Median         Mean      3rd Qu.         Max. 
-## "2012-01-03" "2014-12-22" "2017-08-30" "2017-07-24" "2020-03-12" "2022-09-29"
-```
-
-
+- Will Ju: `wju@iastate.edu`
+- Craig Orman: `cworman@iastate.edu`
 
 ---
 
-# Accessor functions
+# Topics Covered
 
-
-- accessor functions: `year`, `month`, `week`, `wday`, `mday`, `yday`, `hour`, `minute`, ...
-
-- accessor functions can also be used for setting elements of date and time, e.g. `hour(x) &lt;- 12`
-
-Examples:
-
-
-```r
-month(now())
-```
-
-```
-## [1] 6
-```
-
-```r
-wday(now(), label = TRUE)
-```
-
-```
-## [1] Mon
-## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat
-```
+- `R`
+- Exploratory Data Analysis (EDA)
+- Data Manipulation
+  - Data Cleaning
+  - Data Transformation
+  - `filter`/`join`/`group_by`/`arrange`
+- Data Visualization
+  - `ggplot2`
+- Collaborative Environment and Tools
+  - `git` and `GitHub`
+- Making Reproducible Report
+  - `R Markdown`
+- Data Acquisition
+  - Web Scraping Techniques
 
 ---
 
-# Intervals and Durations
+# at the end of the course you will...
 
-- Intervals have a *start* and an *end* date/time: absolute difference
-
-- Durations are potentially of relative length (months, leap year, leap second, ...)
-
-
-```r
-end_date &lt;- now()
-start_date &lt;- end_date - years(1)
-end_date - start_date
-```
-
-```
-## Time difference of 365 days
-```
-
-
----
-class: inverse
-# Your Turn: Iowa Liquor Sales (cont'd)
-
-Use the `ames` data  to answer the following questions:
-
-- give a visual breakdown of the number of sales by year. Is there a pattern recognizable? Does that pattern change when considering the volume of alcohol sold?
-
-- find the weekday associated with each date in the data. Introduce a variable `weekday` into the dataset. What is the number of sales by weekday? What is the volume of alcohol sold? Does that pattern hold over the years?
-
+- be able to acquire and read data in different formats and from different sources
+- know the basic programming principles of R
+- be able to implement a basic data pipeline
+- be able to do a data exploration
+- visualize data in appropriate forms
+- communicate your findings in a reproducible form as report and/or web-app
 
 ---
 
-# Example: Liquor Sales (cont'd)
+# Course Structure and Evaluation
 
-Is there a seasonal effect in the number of liquor sales?
-
-VEISHEA used to be a weeklong student festival during April. It got cancelled in August 2014 after riots in April. 
-
-
-```r
-library(lubridate)
-ames %&gt;% 
-  ggplot(aes(x = month(Date, abbr = TRUE, label=TRUE), 
-             weight = `Volume Sold (Gallons)`/1000)) + 
-  geom_bar() + 
-  facet_wrap(~year(Date), ncol = 6) +
-  ylab("Volume of alcohol sold (in thousands of  Gallons)")
-```
-
-![](04_lubridate_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+- Course Website: [https://ds202-at-isu.github.io/](https://ds202-at-isu.github.io/)
+- Canvas
+  - Announcements
+  - Assignments and grading
 
 ---
-class: inverse
-# Your Turn (10 min)
 
-- find the number of alcohol sales and volume sold on each day over the time frame. What is the average number of sales each day?
+# Course Structure and Evaluation
 
-- Why are there no 0s in the data? Does that change your assessment of the average number of sales per day?
+| Component | Weight |
+|:-- | --:|
+| Homework (5-6) | 20% |
+| Labs (3-4) | 25% |
+| Midterm (1) | 25% |
+| **Final Project** | |
+|   report | 22.5% |
+|   presentation | 7.5% |
 
-- Challenge: use the functions `seq.Date` and `complete`  to introduce days into the dataset with no sales. Start by reading the help files for the functions ... 
+---
 
-&lt;!--
+# Labs
 
-```r
-ames %&gt;%
-  mutate(
-    Date = mdy(Date)
-  ) %&gt;%
-  complete(Date = seq(from=ymd("2012-01-01"), to =ymd("2022-09-30"), by="day")) %&gt;% #head()
-    group_by(Date) %&gt;%
-    summarize(n = sum(!is.na(City))) %&gt;% summary()
-```
+- During class time on every other Wednesday (starting with Wednesday, Sep 17th)
+- You will be partnered (randomly) in groups of 3 to 4
+- Lab assignments are designed to be finished during class time, but ‘finishing touches’ can be applied until the following Monday, 11:59 pm.
+- If you cannot attend the lab, please let me know beforehand. Nevertheless, you are expected to do the work!
 
-```
-## Warning: There was 1 warning in `mutate()`.
-## ℹ In argument: `Date = mdy(Date)`.
-## Caused by warning:
-## ! All formats failed to parse. No formats found.
-```
+---
 
-```
-##       Date                  n           
-##  Min.   :2012-01-01   Min.   :     0.0  
-##  1st Qu.:2014-09-08   1st Qu.:     0.0  
-##  Median :2017-05-16   Median :     0.0  
-##  Mean   :2017-05-16   Mean   :   168.6  
-##  3rd Qu.:2020-01-22   3rd Qu.:     0.0  
-##  Max.   :2022-09-30   Max.   :661945.0  
-##  NA's   :1
-```
---&gt;
+# Homework Assignments
+
+- In weeks without a lab, a homework is posted.
+- Homework assignments revise what we covered, plus synthesize some new information.
+- Plan to spend about 3-4h on each assignment.
+
+---
+
+# Midterm
+
+- In-class programming exam.
+- Open book, open note, open internet
+- No direct help from anyone else
+- Tentatively scheduled for Oct 29
+- Sample exams will be posted as we get closer to the date.
+
+---
+
+# Final Project
+
+- [A good example from previous semester](https://github.com/BraedenCollings/Final-Project-DS202)
+- Group Project
+  - Max: 4 students
+- Use real-world datasets
+- Final Presentation
+- Final Report
+
+---
+
+# Attendance
+
+There will be a substantial amount of time devoted to ‘hands-on’ examples on the computers. Make use of that time!
+
+If you have to miss class, please
+
+- Let me know ahead of time.
+- Make sure to catch up with the material (e.g. have a designated note taker, talk to one of your team members, … )
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

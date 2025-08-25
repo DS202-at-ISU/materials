@@ -107,10 +107,8 @@ wday(now(), label = TRUE)
 
 ```{r}
 end_date <- now()
-# span is interval, years(1) is duration
-span <- end_date - years(1)
-span
-end_date - days(10)
+start_date <- end_date - years(1)
+end_date - start_date
 ```
 
 
