@@ -197,6 +197,12 @@ x[1:5, 2:3]
 x[c(1,5,6), c(3,4,5)]
 ```
 
+- use boolean (logical) variables: row filter
+
+```
+x[logical_var, ]
+```
+
 - For a 2D object (a typical datasets) with column (variable) names
 
 ```
@@ -256,11 +262,19 @@ Summaries of two variables:<br>
 class: inverse
 ## Your turn 
 
+- What are the number of observations and the number of variables for the `fbi` data set
+
 - Look at the first 10 data records of the `fbi` data
 
 - Compute mean and standard deviation for the number of counts. Why do you get NAs? (read `?NA`)
 
-- Advanced:  Read `?mean` and `?sd`, and fix missing value problem
+- Read `?mean` and `?sd`, and fix missing value problem
+
+- Pull the number of counts for `homicide` as a vector named `homicide_vec`
+
+- Compute mean and standard deviation for `homicide_vec`
+
+- Create a new column named `ratio` for `fbi` data set with the formula: `ratio = count / population * 10000`
 
 ---
 
@@ -331,5 +345,35 @@ plus_a_b <- function(arg1, arg2) {
 
 plus_a_b(3, 10)
 ```
+
+---
+class: inverse
+## Your turn 
+
+Write a function named `compute_mean_sd` for the `fbi` data set with the following requirements:
+
+- This function computes the mean and standard deviation of the number of counts for a certain type of crime
+
+- The input is the crime type
+
+- The output is a one-row data frame with three columns: `type`, `mean`, `sd`
+
+- The computation of mean and standard deviation can handle `NA`s
+
+---
+class: inverse
+## Your turn 
+
+Use `compute_mean_sd` and get the results for all types of crime
+
+- `for` loop?
+
+- `apply` functions?
+
+- Put together all results with `rbind`. `?rbind`
+
+
+
+
 
 
