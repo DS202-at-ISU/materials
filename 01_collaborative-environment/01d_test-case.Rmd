@@ -9,13 +9,12 @@ output:
       highlightLines: true
       countIncrementalSlides: false
 ---
-class: center, middle
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 ```
 
----
+
 
 ## A test case
 
@@ -48,7 +47,7 @@ class: inverse
 
 You are asked to investigate the relationship between height and weight of Iowans based on the [2015 BRFSS records](https://raw.githubusercontent.com/Stat585-at-ISU/materials-2022/main/01_collaborative-environment/data/brfss_iowa.csv).
 
-In the next 20 mins:
+In the next 10 mins:
 
 0. Introduce yourself to your neighbor(s).
 
@@ -68,7 +67,7 @@ In the next 20 mins:
 class: inverse
 ## Your turn
 
-In the next 10 mins:
+In the next 5 mins:
 
 1. Introduce yourself to another team. 
 
