@@ -53,7 +53,7 @@ class: inverse, middle, center
 .pull-left[
 - Wildly popular package for statistical graphics: over 1.5 million **monthly**  downloads from CRAN since 2019 (several thousand times per day)
 
-- Developed by Hadley Wickham (An ISU Alumni)
+- Developed by Hadley Wickham (An ISU Alumnus)
 
 - Designed to adhere to good graphical practices
 
@@ -65,7 +65,7 @@ class: inverse, middle, center
 .pull-right[
 ```{r echo = FALSE, message = FALSE}
 library(tidyverse)
-downloads <- cranlogs::cran_downloads(packages = "ggplot2", from = "2007-01-01", to = "2022-08-31")
+downloads <- cranlogs::cran_downloads(packages = "ggplot2", from = "2007-01-01", to = "2024-08-31")
 downloads$month <- lubridate::month(downloads$date)
 downloads$year <- lubridate::year(downloads$date)
 downloads %>% group_by(year, month) %>% summarize( n = sum(count)) %>% 
@@ -74,7 +74,7 @@ downloads %>% group_by(year, month) %>% summarize( n = sum(count)) %>%
   ggtitle("Number of monthly downloads of ggplot2") +
   theme_bw() +
   xlab("Time") +
-  scale_x_continuous(breaks=c(2007, 2010, 2013, 2016, 2019, 2022))
+  scale_x_continuous(breaks=c(2007, 2010, 2013, 2016, 2019, 2022, 2024))
 ```
 ]
 
