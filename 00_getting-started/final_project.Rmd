@@ -28,6 +28,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Final Project Evaluation
 
 - Report (22.5% of entire grade)
+  - the report evaluation rubric will be posted on Canvas
 
 - Presentation (7.5% of entire grade)
 
