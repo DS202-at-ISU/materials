@@ -13,40 +13,81 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Final projects
+## Final Project Basics
 
 -   team based project (2 - 3 members)
+
 -   maximum of 5 members, larger teams are expected to deliver longer report
+
 -   each individual is expected to ask at least 2 questions based on the data. Thus, each individual is expected to make at least two visuals in the report
+
 -   real-world datasets are highly encouraged
+
+---
+
+## Final Project Evaluation
+
+- Report (22.5% of entire grade)
+
+- Presentation (7.5% of entire grade)
+
+- Extra credit
+  - use real-world dataset
+  - submit proposal on Canvas
+  - submit report draft on Canvas
+  - ...
 
 ---
 
 ## Timeline
 
--   Week 8: final presentation?
--   Week 8 (Finals week): submit final report
+-   Start of November: Project proposal due
+
+-   End of November: Report draft due
+
+-   Week of Dec 8 and Dec 15: Presentation
+
+-   Dec 15: Report due 
 
 ---
 
-## Project proposal
+## Project Proposal
 
 -   Research topic (title)
+
 -   Team members
+
 -   Data
+
 -   Questions to be addressed
 
 ---
 
-## Final report
+## Final Report
+
+Your final project report is expected to be structured as the following:
 
 -   Introduction / background
+
 -   Data
     -   Could include data processing
+
 -   Methods if applicable
+
 -   Results
     -   Your findings
+
 -   Conclusion
+
+---
+
+## Final Presentation
+
+-   You will need to select a time slot for your final presentation on either Dec 8, Dec 10, or Dec 15
+
+-   The length of your presentation time slot depends on the number of students of your team. Each student is expected to have 5 minutes; e.g. A team of 3 students will have 15 minutes for final presentation
+
+-   You will make slides (PowerPoint/Keynote/Google Slides) for your final presentation covering the intro, data, main results, and conclusion of your project
 
 ---
 
