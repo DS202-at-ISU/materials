@@ -1,5 +1,5 @@
 ---
-title: "Fall 2025 DS2020: Syllabus"
+title: "Spring 2026 DS2020: Syllabus"
 author: "Will Ju"
 date: ""
 output: 
