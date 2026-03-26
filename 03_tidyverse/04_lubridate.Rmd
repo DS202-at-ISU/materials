@@ -1,6 +1,6 @@
 ---
 title: "Dates and times"
-author: "Will Ju"
+author: "Ben Moolman"
 output:
   xaringan::moon_reader:
     lib_dir: libs
