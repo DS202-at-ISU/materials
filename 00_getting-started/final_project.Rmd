@@ -1,6 +1,6 @@
 ---
 title: "DS 2020 Final Projects"
-author: "Will Ju"
+author: "Ben Moolan"
 output:
   xaringan::moon_reader:
     nature:
@@ -42,13 +42,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Timeline
 
--   Start of November: Project proposal due
+-   Early April: Project proposal due
 
--   End of November: Report draft due
+-   Late April: Report draft due
 
--   Week of Dec 8 and Dec 15: Presentation
+-   May 4 and May 6: In-class presentations
 
--   Dec 15: Report due 
+-   May 11: Additional presentation time during the final exam block (if needed)
+
+-   Final report due in May
 
 ---
 
@@ -86,9 +88,9 @@ Take a look at [A good example from previous semester](https://github.com/Braede
 
 ## Final Presentation
 
--   You will need to select a time slot for your final presentation on either Dec 8, Dec 10, or Dec 15
+-   You will select a time slot for your final presentation on May 4 or May 6 during regular class time, with May 11 available if additional presentation time is needed
 
--   The length of your presentation time slot depends on the number of students of your team. Each student is expected to have 5 minutes; e.g. A team of 3 students will have 15 minutes for final presentation
+-   The length of your presentation time slot depends on the number of students on your team. Each student is expected to have 5 minutes; e.g. a team of 3 students will have 15 minutes for the final presentation
 
 -   You will make slides (PowerPoint/Keynote/Google Slides) for your final presentation covering the intro, data, main results, and conclusion of your project
 
