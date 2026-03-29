@@ -1,6 +1,6 @@
 ---
 title: "DS 2020 Final Projects"
-author: "Ben Moolan"
+author: "Ben Moolman"
 output:
   xaringan::moon_reader:
     nature:
