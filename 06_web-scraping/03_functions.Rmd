@@ -1,6 +1,6 @@
 ---
 title: "Functions in R and your first scraper"
-author: "Will Ju"
+author: "DS 2020"
 output:
   xaringan::moon_reader:
     lib_dir: libs
