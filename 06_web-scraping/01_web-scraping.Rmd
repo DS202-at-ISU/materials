@@ -271,8 +271,14 @@ What other information do we need to know? - and how can we get to that?
 url <- "https://www.baseball-reference.com/players/a/abadfe01.shtml"
 html <- read_html(url)
 
-table_col_names <- html %>% html_elements("span strong") %>% html_text()
-stats <- html %>% html_elements(".stats_pullout p") %>% html_text()
+table_col_names <- html %>% 
+  html_elements("span strong") %>% 
+  html_text() %>% 
+  .[-length(.)]
+
+stats <- html %>% 
+  html_elements(".stats_pullout p") %>% 
+  html_text()
 
 stats <- matrix(stats, nrow = 1)
 stats <- as.data.frame(stats)
@@ -286,8 +292,14 @@ stats
 
 It's sometimes easier (for data munging after extracting) to extract multiple pieces rather than everything in one go. 
 ```{r}
-(stats <- html %>% html_elements("span strong") %>% html_text())
-(season <- html %>% html_elements(".stats_pullout p:nth-child(2)") %>% html_text())
+(stats <- html %>% 
+  html_elements("span strong") %>% 
+  html_text() %>% 
+  .[-length(.)])
+
+(season <- html %>% 
+  html_elements(".stats_pullout p:nth-child(2)") %>% 
+  html_text())
 # (career <- html %>% html_elements(".stats_pullout p:nth-child(3)") %>% html_text())
 ```
 

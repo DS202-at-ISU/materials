@@ -4,7 +4,7 @@
     <title>Web Scraping</title>
     <meta charset="utf-8" />
     <meta name="author" content="DS 2020" />
-    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.30/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="tweaks.css" type="text/css" />
@@ -41,7 +41,7 @@ class: center, middle, inverse, title-slide
 - `read_html` gets the full set of HTML markup from a URL
 
 
-```r
+``` r
 library(rvest)
 url &lt;- "https://en.wikipedia.org/wiki/2023_Baseball_Hall_of_Fame_balloting"
 html &lt;- read_html(url)
@@ -50,7 +50,7 @@ html
 
 ```
 ## {html_document}
-## &lt;html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-1 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-enabled skin-theme-clientpref-day vector-sticky-header-enabled vector-toc-available" lang="en" dir="ltr"&gt;
+## &lt;html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-menu-disabled vector-feature-language-in-main-page-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-1 vector-feature-appearance-pinned-clientpref-1 skin-theme-clientpref-day vector-sticky-header-enabled vector-toc-available skin-theme-clientpref-thumb-standard" lang="en" dir="ltr"&gt;
 ## [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text ...
 ## [2] &lt;body class="skin--responsive skin-vector skin-vector ...
 ```
@@ -64,7 +64,7 @@ html
 `html_table` extracts all tables from the sourced html into a list of data frames:
   
 
-```r
+``` r
 tables &lt;- html %&gt;% html_table(fill=TRUE)
 # tables %&gt;% str()
 ```
@@ -76,7 +76,7 @@ tables &lt;- html %&gt;% html_table(fill=TRUE)
 Most tables need a bit of clean-up:
 
 
-```r
+``` r
 bbwaa &lt;- tables[[3]]  # candidates on the BBWAA Ballot
 vet1 &lt;- tables[[5]] # Early Baseball Era Committee
 vet2 &lt;- tables[[6]] # Golden Days Era Committee
@@ -112,7 +112,7 @@ Which source should we use?
 # Your Turn - Reading Data
 
 
-```r
+``` r
 hof &lt;- "https://bbwaa.com/23-hof/#votingtable"
 html &lt;- read_html(hof)
 
@@ -142,7 +142,7 @@ head(bbwaa)
 The `HallOfFame` dataset in the Lahman package has slightly different variables, as shown below. How would you go about determining these variables for the `bbwaa` data? 
 
 
-```r
+``` r
 library(Lahman)
 
 head(HallOfFame,2)
@@ -165,7 +165,7 @@ head(HallOfFame,2)
 From https://bbwaa.com/23-hof/ : 389 ballots cast in 2023, 292 needed for induction 
 
 
-```r
+``` r
 bbwaa &lt;- bbwaa %&gt;% mutate(
   yearID = 2023,
   votedBy = "BBWAA",
@@ -188,7 +188,7 @@ The `People` data frame has `playerID` and players' names
 We could try to create a (temporary) variable in `People` called `First Lastname` that consists of `nameFirst` and `nameLast`:
 
 
-```r
+``` r
 People &lt;- People %&gt;% mutate(
   `First Lastname`=paste(`nameFirst`, `nameLast`)
 )
@@ -209,7 +209,7 @@ Get the list of names that we can not match. Is there a possible reason that we 
 # Your Turn - Identifying Problems
 
 
-```r
+``` r
 bbwaa %&gt;% anti_join(
   People %&gt;% select(`First Lastname`, playerID), 
   by="First Lastname")
@@ -225,7 +225,7 @@ bbwaa %&gt;% anti_join(
 ## #   needed_note &lt;lgl&gt;
 ```
 
-```r
+``` r
 People %&gt;% filter(nameLast %in% c("Dickey", "Hardy")) %&gt;%
   select(playerID, nameFirst, nameLast)
 ```
@@ -235,15 +235,19 @@ People %&gt;% filter(nameLast %in% c("Dickey", "Hardy")) %&gt;%
 ## 1  dickebi01      Bill   Dickey
 ## 2  dickege02    George   Dickey
 ## 3  dickera01     R. A.   Dickey
-## 4  hardyal01      Alex    Hardy
-## 5  hardybl01    Blaine    Hardy
-## 6  hardyca01   Carroll    Hardy
-## 7  hardyha01     Harry    Hardy
-## 8  hardyja01      Jack    Hardy
-## 9  hardyja02      Jack    Hardy
-## 10 hardyjj01     J. J.    Hardy
-## 11 hardyla01     Larry    Hardy
-## 12 hardyre01       Red    Hardy
+## 4  dickest01 Steel Arm   Dickey
+## 5  hardyal01      Alex    Hardy
+## 6  hardybl01    Blaine    Hardy
+## 7   hardyc01        C.    Hardy
+## 8  hardyca01   Carroll    Hardy
+## 9  hardyha01     Harry    Hardy
+## 10 hardyja01      Jack    Hardy
+## 11 hardyja02      Jack    Hardy
+## 12 hardyjj01     J. J.    Hardy
+## 13 hardyla01     Larry    Hardy
+## 14 hardypa01      Paul    Hardy
+## 15 hardyre01       Red    Hardy
+## 16 hardywa01    Walter    Hardy
 ```
 
 ---
@@ -253,7 +257,7 @@ People %&gt;% filter(nameLast %in% c("Dickey", "Hardy")) %&gt;%
 New idea: get rid of any white spaces after . in the first name before creating variable `First Lastname`
 
 
-```r
+``` r
 People &lt;- People %&gt;% mutate(
   `First Lastname` = paste(
     str_replace(nameFirst,"\\. ", "."),  # this uses a regular expression
@@ -264,22 +268,26 @@ People %&gt;% filter(nameLast %in% c("Dickey", "Hardy")) %&gt;%
 ```
 
 ```
-##     playerID First Lastname
-## 1  dickebi01    Bill Dickey
-## 2  dickege02  George Dickey
-## 3  dickera01    R.A. Dickey
-## 4  hardyal01     Alex Hardy
-## 5  hardybl01   Blaine Hardy
-## 6  hardyca01  Carroll Hardy
-## 7  hardyha01    Harry Hardy
-## 8  hardyja01     Jack Hardy
-## 9  hardyja02     Jack Hardy
-## 10 hardyjj01     J.J. Hardy
-## 11 hardyla01    Larry Hardy
-## 12 hardyre01      Red Hardy
+##     playerID   First Lastname
+## 1  dickebi01      Bill Dickey
+## 2  dickege02    George Dickey
+## 3  dickera01      R.A. Dickey
+## 4  dickest01 Steel Arm Dickey
+## 5  hardyal01       Alex Hardy
+## 6  hardybl01     Blaine Hardy
+## 7   hardyc01         C. Hardy
+## 8  hardyca01    Carroll Hardy
+## 9  hardyha01      Harry Hardy
+## 10 hardyja01       Jack Hardy
+## 11 hardyja02       Jack Hardy
+## 12 hardyjj01       J.J. Hardy
+## 13 hardyla01      Larry Hardy
+## 14 hardypa01       Paul Hardy
+## 15 hardyre01        Red Hardy
+## 16 hardywa01     Walter Hardy
 ```
 
-```r
+``` r
 bbwaa %&gt;% anti_join(
   People %&gt;% select(`First Lastname`, playerID), 
   by="First Lastname") %&gt;% nrow() # no problems anymore!
@@ -296,7 +304,7 @@ class:inverse
 The code below merges the playerID from the expanded People data into the scraped bbwaa results.
 
 
-```r
+``` r
 bbwaa &lt;- bbwaa %&gt;% left_join(
   People %&gt;% select(`First Lastname`, playerID), 
   by="First Lastname")
@@ -336,90 +344,90 @@ If you prefer, you can also read the HTML code and create your own [CSS](https:/
 *Select all active baseball players with a last name starting with 'a'*
 
 
-```r
+``` r
 url &lt;- "http://www.baseball-reference.com/players/a/"
 html &lt;- read_html(url)
 html %&gt;% html_elements("b") %&gt;% html_text()
 ```
 
 ```
-##  [1] "Andrew Abbott  (2023-2025)"     
-##  [2] "CJ Abrams  (2022-2025)"         
-##  [3] "Albert Abreu  (2020-2023)"      
-##  [4] "Bryan Abreu  (2019-2025)"       
-##  [5] "José Abreu  (2014-2024)"        
-##  [6] "Wilyer Abreu  (2023-2025)"      
-##  [7] "Garrett Acton  (2023-2023)"     
-##  [8] "Luisangel Acuña  (2024-2025)"   
-##  [9] "Ronald Acuña Jr.  (2018-2024)"  
-## [10] "Jason Adam  (2018-2025)"        
-## [11] "Willy Adames  (2018-2025)"      
-## [12] "Austin Adams  (2017-2024)"      
-## [13] "Jordyn Adams  (2023-2024)"      
+##  [1] "Andrew Abbott  (2023-2026)"     
+##  [2] "Mick Abel  (2025-2026)"         
+##  [3] "Philip Abner  (2025-2025)"      
+##  [4] "CJ Abrams  (2022-2026)"         
+##  [5] "Bryan Abreu  (2019-2026)"       
+##  [6] "Wilyer Abreu  (2023-2026)"      
+##  [7] "Maximo Acosta  (2025-2025)"     
+##  [8] "Garrett Acton  (2023-2026)"     
+##  [9] "Luisangel Acuña  (2024-2026)"   
+## [10] "Ronald Acuña Jr.  (2018-2026)"  
+## [11] "Jason Adam  (2018-2026)"        
+## [12] "Willy Adames  (2018-2026)"      
+## [13] "Jordyn Adams  (2023-2025)"      
 ## [14] "Riley Adams  (2021-2025)"       
-## [15] "Ty Adcock  (2023-2024)"         
-## [16] "Jo Adell  (2020-2025)"          
-## [17] "Joan Adon  (2021-2024)"         
-## [18] "Julian Aguiar  (2024-2024)"     
-## [19] "Nick Ahmed  (2014-2024)"        
+## [15] "Travis Adams  (2025-2025)"      
+## [16] "Ty Adcock  (2023-2025)"         
+## [17] "Jo Adell  (2020-2026)"          
+## [18] "Zach Agnos  (2025-2026)"        
+## [19] "Julian Aguiar  (2024-2024)"     
 ## [20] "Keegan Akin  (2020-2025)"       
-## [21] "Ozzie Albies  (2017-2025)"      
-## [22] "Jorge Alcalá  (2019-2025)"      
-## [23] "Kevin Alcántara  (2024-2024)"   
-## [24] "Sandy Alcantara  (2017-2025)"   
-## [25] "Sergio Alcántara  (2020-2022)"  
-## [26] "Sam Aldegheri  (2024-2024)"     
-## [27] "Blaze Alexander  (2024-2024)"   
-## [28] "CJ Alexander  (2024-2024)"      
+## [21] "Ozzie Albies  (2017-2026)"      
+## [22] "Jorge Alcala  (2019-2025)"      
+## [23] "Kevin Alcántara  (2024-2025)"   
+## [24] "Sandy Alcantara  (2017-2026)"   
+## [25] "Sergio Alcántara  (2020-2025)"  
+## [26] "Sam Aldegheri  (2024-2025)"     
+## [27] "Blaze Alexander  (2024-2026)"   
+## [28] "CJ Alexander  (2024-2025)"      
 ## [29] "Jason Alexander  (2022-2025)"   
-## [30] "Scott Alexander  (2015-2025)"   
-## [31] "Tyler Alexander  (2019-2025)"   
-## [32] "Jorge Alfaro  (2016-2023)"      
-## [33] "Kolby Allard  (2018-2024)"      
-## [34] "Greg Allen  (2017-2023)"        
-## [35] "Logan Allen  (2023-2025)"       
-## [36] "Nick Allen  (2022-2025)"        
-## [37] "Yency Almonte  (2018-2024)"     
-## [38] "Albert Almora  (2016-2022)"     
-## [39] "Pete Alonso  (2019-2025)"       
-## [40] "Dan Altavilla  (2016-2024)"     
-## [41] "Jose Altuve  (2011-2025)"       
-## [42] "José Alvarado  (2017-2025)"     
-## [43] "Armando Alvarez  (2024-2024)"   
-## [44] "Eddy Alvarez  (2020-2024)"      
-## [45] "Francisco Alvarez  (2022-2024)" 
-## [46] "Nacho Alvarez Jr.  (2024-2024)" 
-## [47] "Yordan Alvarez  (2019-2025)"    
-## [48] "Adbert Alzolay  (2019-2024)"    
-## [49] "Adael Amador  (2024-2025)"      
-## [50] "Jacob Amaya  (2023-2025)"       
-## [51] "Miguel Amaya  (2023-2025)"      
-## [52] "Grant Anderson  (2023-2025)"    
-## [53] "Ian Anderson  (2020-2025)"      
-## [54] "Justin Anderson  (2018-2024)"   
-## [55] "Nick Anderson  (2019-2024)"     
-## [56] "Shaun Anderson  (2019-2024)"    
-## [57] "Tim Anderson  (2016-2025)"      
-## [58] "Tyler Anderson  (2016-2025)"    
-## [59] "Miguel Andujar  (2017-2025)"    
-## [60] "Tejay Antone  (2020-2024)"      
-## [61] "Jonathan Aranda  (2022-2025)"   
-## [62] "Orlando Arcia  (2016-2025)"     
-## [63] "Nolan Arenado  (2013-2025)"     
-## [64] "Gabriel Arias  (2022-2025)"     
-## [65] "Luarbert Arias  (2025-2025)"    
-## [66] "Shawn Armstrong  (2015-2025)"   
-## [67] "Randy Arozarena  (2019-2025)"   
-## [68] "Luis Arráez  (2019-2025)"       
-## [69] "Spencer Arrighetti  (2024-2025)"
-## [70] "Christian Arroyo  (2017-2023)"  
-## [71] "Aaron Ashby  (2021-2024)"       
-## [72] "Graham Ashcraft  (2022-2025)"   
-## [73] "Javier Assad  (2022-2024)"      
-## [74] "José Azocar  (2022-2024)"
+## [30] "Tyler Alexander  (2019-2026)"   
+## [31] "Jorge Alfaro  (2016-2025)"      
+## [32] "Kolby Allard  (2018-2026)"      
+## [33] "Logan Allen  (2019-2024)"       
+## [34] "Logan Allen  (2023-2025)"       
+## [35] "Nick Allen  (2022-2026)"        
+## [36] "Yency Almonte  (2018-2024)"     
+## [37] "Pete Alonso  (2019-2026)"       
+## [38] "Dan Altavilla  (2016-2025)"     
+## [39] "Jose Altuve  (2011-2026)"       
+## [40] "Elvis Alvarado  (2025-2026)"    
+## [41] "José Alvarado  (2017-2026)"     
+## [42] "Andrew Alvarez  (2025-2025)"    
+## [43] "Francisco Alvarez  (2022-2026)" 
+## [44] "Nacho Alvarez Jr.  (2024-2025)" 
+## [45] "Yordan Alvarez  (2019-2026)"    
+## [46] "Adbert Alzolay  (2019-2024)"    
+## [47] "Adael Amador  (2024-2025)"      
+## [48] "Jacob Amaya  (2023-2025)"       
+## [49] "Miguel Amaya  (2023-2026)"      
+## [50] "Drew Anderson  (2017-2026)"     
+## [51] "Grant Anderson  (2023-2026)"    
+## [52] "Nick Anderson  (2019-2025)"     
+## [53] "Shaun Anderson  (2019-2026)"    
+## [54] "Miguel Andujar  (2017-2026)"    
+## [55] "Roman Anthony  (2025-2026)"     
+## [56] "Tejay Antone  (2020-2024)"      
+## [57] "Jonathan Aranda  (2022-2026)"   
+## [58] "Orlando Arcia  (2016-2025)"     
+## [59] "Nolan Arenado  (2013-2026)"     
+## [60] "Gabriel Arias  (2022-2026)"     
+## [61] "Shawn Armstrong  (2015-2026)"   
+## [62] "Randy Arozarena  (2019-2026)"   
+## [63] "Luis Arraez  (2019-2026)"       
+## [64] "Spencer Arrighetti  (2024-2025)"
+## [65] "Christian Arroyo  (2017-2023)"  
+## [66] "Aaron Ashby  (2021-2026)"       
+## [67] "Braxton Ashcraft  (2025-2026)"  
+## [68] "Graham Ashcraft  (2022-2026)"   
+## [69] "Javier Assad  (2022-2026)"      
+## [70] "Tyler Austin  (2016-2019)"      
+## [71] "Drew Avans  (2025-2025)"        
+## [72] "Luinder Avila  (2025-2026)"     
+## [73] "Pedro Avila  (2019-2024)"       
+## [74] "José Azocar  (2022-2025)"
 ```
 
-```r
+``` r
 # html %&gt;% html_elements("#div_players_ p") %&gt;% html_text()
 ```
 
@@ -434,30 +442,30 @@ We are, in fact, not just interested in the *names of the players*, but also in 
 - `html_attrs` extracts all attributes of an html node
 
 
-```r
+``` r
 html %&gt;% html_elements("b a") %&gt;% html_attr(name="href")
 ```
 
 ```
 ##  [1] "/players/a/abbotan01.shtml"
-##  [2] "/players/a/abramcj01.shtml"
-##  [3] "/players/a/abreual01.shtml"
-##  [4] "/players/a/abreubr01.shtml"
-##  [5] "/players/a/abreujo02.shtml"
+##  [2] "/players/a/abelmi01.shtml" 
+##  [3] "/players/a/abnerph01.shtml"
+##  [4] "/players/a/abramcj01.shtml"
+##  [5] "/players/a/abreubr01.shtml"
 ##  [6] "/players/a/abreuwi02.shtml"
-##  [7] "/players/a/actonga01.shtml"
-##  [8] "/players/a/acunajo01.shtml"
-##  [9] "/players/a/acunaro01.shtml"
-## [10] "/players/a/adamja01.shtml" 
-## [11] "/players/a/adamewi01.shtml"
-## [12] "/players/a/adamsau02.shtml"
+##  [7] "/players/a/acostma02.shtml"
+##  [8] "/players/a/actonga01.shtml"
+##  [9] "/players/a/acunajo01.shtml"
+## [10] "/players/a/acunaro01.shtml"
+## [11] "/players/a/adamja01.shtml" 
+## [12] "/players/a/adamewi01.shtml"
 ## [13] "/players/a/adamsjo03.shtml"
 ## [14] "/players/a/adamsri03.shtml"
-## [15] "/players/a/adcocty01.shtml"
-## [16] "/players/a/adelljo01.shtml"
-## [17] "/players/a/adonjo01.shtml" 
-## [18] "/players/a/aguiaju01.shtml"
-## [19] "/players/a/ahmedni01.shtml"
+## [15] "/players/a/adamstr01.shtml"
+## [16] "/players/a/adcocty01.shtml"
+## [17] "/players/a/adelljo01.shtml"
+## [18] "/players/a/agnosza01.shtml"
+## [19] "/players/a/aguiaju01.shtml"
 ## [20] "/players/a/akinke01.shtml" 
 ## [21] "/players/a/albieoz01.shtml"
 ## [22] "/players/a/alcaljo01.shtml"
@@ -468,50 +476,50 @@ html %&gt;% html_elements("b a") %&gt;% html_attr(name="href")
 ## [27] "/players/a/alexabl01.shtml"
 ## [28] "/players/a/alexacj01.shtml"
 ## [29] "/players/a/alexaja01.shtml"
-## [30] "/players/a/alexasc02.shtml"
-## [31] "/players/a/alexaty01.shtml"
-## [32] "/players/a/alfarjo01.shtml"
-## [33] "/players/a/allarko01.shtml"
-## [34] "/players/a/allengr01.shtml"
-## [35] "/players/a/allenlo02.shtml"
-## [36] "/players/a/allenni02.shtml"
-## [37] "/players/a/almonye01.shtml"
-## [38] "/players/a/almoral01.shtml"
-## [39] "/players/a/alonspe01.shtml"
-## [40] "/players/a/altavda01.shtml"
-## [41] "/players/a/altuvjo01.shtml"
-## [42] "/players/a/alvarjo03.shtml"
-## [43] "/players/a/alvarar01.shtml"
-## [44] "/players/a/alvared01.shtml"
-## [45] "/players/a/alvarfr01.shtml"
-## [46] "/players/a/alvarna01.shtml"
-## [47] "/players/a/alvaryo01.shtml"
-## [48] "/players/a/alzolad01.shtml"
-## [49] "/players/a/amadoad01.shtml"
-## [50] "/players/a/amayaja01.shtml"
-## [51] "/players/a/amayami01.shtml"
-## [52] "/players/a/andergr01.shtml"
-## [53] "/players/a/anderia01.shtml"
-## [54] "/players/a/anderju01.shtml"
-## [55] "/players/a/anderni01.shtml"
-## [56] "/players/a/andersh01.shtml"
-## [57] "/players/a/anderti01.shtml"
-## [58] "/players/a/anderty01.shtml"
-## [59] "/players/a/andujmi01.shtml"
-## [60] "/players/a/antonte01.shtml"
-## [61] "/players/a/arandjo01.shtml"
-## [62] "/players/a/arciaor01.shtml"
-## [63] "/players/a/arenano01.shtml"
-## [64] "/players/a/ariasga01.shtml"
-## [65] "/players/a/ariaslu01.shtml"
-## [66] "/players/a/armstsh01.shtml"
-## [67] "/players/a/arozara01.shtml"
-## [68] "/players/a/arraelu01.shtml"
-## [69] "/players/a/arrigsp01.shtml"
-## [70] "/players/a/arroych01.shtml"
-## [71] "/players/a/ashbyaa01.shtml"
-## [72] "/players/a/ashcrgr01.shtml"
-## [73] "/players/a/assadja01.shtml"
+## [30] "/players/a/alexaty01.shtml"
+## [31] "/players/a/alfarjo01.shtml"
+## [32] "/players/a/allarko01.shtml"
+## [33] "/players/a/allenlo01.shtml"
+## [34] "/players/a/allenlo02.shtml"
+## [35] "/players/a/allenni02.shtml"
+## [36] "/players/a/almonye01.shtml"
+## [37] "/players/a/alonspe01.shtml"
+## [38] "/players/a/altavda01.shtml"
+## [39] "/players/a/altuvjo01.shtml"
+## [40] "/players/a/alvarel01.shtml"
+## [41] "/players/a/alvarjo03.shtml"
+## [42] "/players/a/alvaran01.shtml"
+## [43] "/players/a/alvarfr01.shtml"
+## [44] "/players/a/alvarna01.shtml"
+## [45] "/players/a/alvaryo01.shtml"
+## [46] "/players/a/alzolad01.shtml"
+## [47] "/players/a/amadoad01.shtml"
+## [48] "/players/a/amayaja01.shtml"
+## [49] "/players/a/amayami01.shtml"
+## [50] "/players/a/anderdr02.shtml"
+## [51] "/players/a/andergr01.shtml"
+## [52] "/players/a/anderni01.shtml"
+## [53] "/players/a/andersh01.shtml"
+## [54] "/players/a/andujmi01.shtml"
+## [55] "/players/a/anthoro01.shtml"
+## [56] "/players/a/antonte01.shtml"
+## [57] "/players/a/arandjo01.shtml"
+## [58] "/players/a/arciaor01.shtml"
+## [59] "/players/a/arenano01.shtml"
+## [60] "/players/a/ariasga01.shtml"
+## [61] "/players/a/armstsh01.shtml"
+## [62] "/players/a/arozara01.shtml"
+## [63] "/players/a/arraelu01.shtml"
+## [64] "/players/a/arrigsp01.shtml"
+## [65] "/players/a/arroych01.shtml"
+## [66] "/players/a/ashbyaa01.shtml"
+## [67] "/players/a/ashcrbr01.shtml"
+## [68] "/players/a/ashcrgr01.shtml"
+## [69] "/players/a/assadja01.shtml"
+## [70] "/players/a/austity01.shtml"
+## [71] "/players/a/avansdr01.shtml"
+## [72] "/players/a/avilalu02.shtml"
+## [73] "/players/a/avilape01.shtml"
 ## [74] "/players/a/azocajo01.shtml"
 ```
 
@@ -532,12 +540,18 @@ What other information do we need to know? - and how can we get to that?
 ## Your Turn  - Solution
 
 
-```r
+``` r
 url &lt;- "https://www.baseball-reference.com/players/a/abadfe01.shtml"
 html &lt;- read_html(url)
 
-table_col_names &lt;- html %&gt;% html_elements("span strong") %&gt;% html_text()
-stats &lt;- html %&gt;% html_elements(".stats_pullout p") %&gt;% html_text()
+table_col_names &lt;- html %&gt;% 
+  html_elements("span strong") %&gt;% 
+  html_text() %&gt;% 
+  .[-length(.)]
+
+stats &lt;- html %&gt;% 
+  html_elements(".stats_pullout p") %&gt;% 
+  html_text()
 
 stats &lt;- matrix(stats, nrow = 1)
 stats &lt;- as.data.frame(stats)
@@ -556,8 +570,11 @@ stats
 
 It's sometimes easier (for data munging after extracting) to extract multiple pieces rather than everything in one go. 
 
-```r
-(stats &lt;- html %&gt;% html_elements("span strong") %&gt;% html_text())
+``` r
+(stats &lt;- html %&gt;% 
+  html_elements("span strong") %&gt;% 
+  html_text() %&gt;% 
+  .[-length(.)])
 ```
 
 ```
@@ -566,8 +583,10 @@ It's sometimes easier (for data munging after extracting) to extract multiple pi
 ## [11] "WHIP"
 ```
 
-```r
-(season &lt;- html %&gt;% html_elements(".stats_pullout p:nth-child(2)") %&gt;% html_text())
+``` r
+(season &lt;- html %&gt;% 
+  html_elements(".stats_pullout p:nth-child(2)") %&gt;% 
+  html_text())
 ```
 
 ```
@@ -575,7 +594,7 @@ It's sometimes easier (for data munging after extracting) to extract multiple pi
 ##  [7] "6"      "2"      "354.2"  "292"    "1.322"
 ```
 
-```r
+``` r
 # (career &lt;- html %&gt;% html_elements(".stats_pullout p:nth-child(3)") %&gt;% html_text())
 ```
 
@@ -600,9 +619,9 @@ navigate back and forward with `session_back()` and `session_forward()`.
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="macros.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
