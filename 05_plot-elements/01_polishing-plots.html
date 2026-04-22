@@ -3,8 +3,8 @@
   <head>
     <title>Polishing Plots</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Will Ju" />
-    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
+    <meta name="author" content="DS 2020" />
+    <script src="libs/header-attrs-2.30/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 # Polishing Plots
 ]
 .author[
-### Will Ju
+### DS 2020
 ]
 
 ---
@@ -44,7 +44,7 @@ class: center, middle, inverse, title-slide
 
 
 
-```r
+``` r
 library(tidyverse)
 p1 &lt;- mpg %&gt;% filter(year == 2008) %&gt;%
   ggplot(aes(x = cty, y = hwy, colour = cyl)) +
@@ -53,7 +53,7 @@ p1 &lt;- mpg %&gt;% filter(year == 2008) %&gt;%
 
 
 
-```r
+``` r
 p1 + scale_colour_continuous()
 ```
 
@@ -64,7 +64,7 @@ p1 + scale_colour_continuous()
 # Default discrete colour scheme
 
 
-```r
+``` r
 p2 &lt;- mpg %&gt;% filter(year == 2008) %&gt;%
   ggplot(aes(x = cty, y = hwy, colour = factor(cyl))) +
   geom_point()
@@ -72,7 +72,7 @@ p2 &lt;- mpg %&gt;% filter(year == 2008) %&gt;%
 
 
 
-```r
+``` r
 p2 + scale_colour_discrete()
 ```
 
@@ -112,7 +112,7 @@ high = muted("blue"), midpoint = 0, space = "Lab", na.value = "grey50",  guide =
 ---
 
 
-```r
+``` r
 mean(mtcars$mpg)
 ```
 
@@ -120,7 +120,7 @@ mean(mtcars$mpg)
 ## [1] 20.09062
 ```
 
-```r
+``` r
 mtcars %&gt;% 
   ggplot(aes(x = mpg, colour=mpg, y = 1)) + 
   geom_vline(xintercept=20) +
@@ -152,7 +152,7 @@ mtcars %&gt;%
 - see also http://colorbrewer2.org/ (Brewer et al 2002)
 
 
-```r
+``` r
 mtcars %&gt;% 
   ggplot(aes(x = mpg, colour=factor(cyl), y = 1)) + 
   geom_point(size = 5) +
@@ -165,7 +165,7 @@ mtcars %&gt;%
 # All brewer schemes
 
 
-```r
+``` r
 library(RColorBrewer)
 display.brewer.all()
 ```
@@ -202,13 +202,13 @@ values is a vector of color values. At least as many colors as levels in the var
 # Example
 
 
-```r
+``` r
 p &lt;- mpg %&gt;% ggplot(aes(x = displ, y =  cty, colour= factor(class))) + geom_point()
 ```
 
 .pull-left[
 
-```r
+``` r
 p + theme_grey()
 ```
 
@@ -217,7 +217,7 @@ p + theme_grey()
 
 .pull-right[
 
-```r
+``` r
 p + theme_bw()
 ```
 
@@ -231,13 +231,13 @@ p + theme_bw()
 # Example - more themes
 
 
-```r
+``` r
 p &lt;- mtcars %&gt;% ggplot(aes(x = wt, y =  mpg, colour= factor(cyl))) + geom_point()
 ```
 
 .pull-left[
 
-```r
+``` r
 p + theme_light()
 ```
 
@@ -246,7 +246,7 @@ p + theme_light()
 
 .pull-right[
 
-```r
+``` r
 p + theme_dark()
 ```
 
@@ -260,14 +260,14 @@ p + theme_dark()
 # More themes
 
 
-```r
+``` r
 library(ggthemes)
 ```
 
 
 .pull-left[
 
-```r
+``` r
 p + theme_excel() 
 ```
 
@@ -275,7 +275,7 @@ p + theme_excel()
 ]
 .pull-right[
 
-```r
+``` r
 p + theme_fivethirtyeight()
 ```
 
@@ -288,7 +288,7 @@ p + theme_fivethirtyeight()
 
 .pull-left[
 
-```r
+``` r
 p + theme_light(base_size=18) 
 ```
 
@@ -296,7 +296,7 @@ p + theme_light(base_size=18)
 ]
 .pull-right[
 
-```r
+``` r
 p + theme_light(base_size=24)
 ```
 
@@ -343,7 +343,7 @@ for a complete overview see `?theme`
 - example:
 
 
-```r
+``` r
 mpg %&gt;% ggplot(aes(x = manufacturer)) + geom_bar() +
   theme(axis.text.x = element_text(angle=90, vjust=0.5, hjust=1))
 ```
@@ -353,9 +353,9 @@ mpg %&gt;% ggplot(aes(x = manufacturer)) + geom_bar() +
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
